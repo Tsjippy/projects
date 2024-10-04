@@ -1,1 +1,2 @@
-A module for the sim-plugin to add signal messaging
+This module adds a custom post type 'projects'.<br>
+It depends on the location module

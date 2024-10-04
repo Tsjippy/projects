@@ -17,10 +17,6 @@ add_filter('sim_submenu_description', function($description, $moduleSlug){
 
 	?>
 	<p>
-		This module adds a custom post type 'projects'.<br>
-		It depends on the location module<br>
-	</p>
-	<p>
 		<strong>Auto created page:</strong><br>
 		<a href='<?php echo home_url('/projects');?>'>Projects</a><br>
 	</p>
