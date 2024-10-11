@@ -110,7 +110,7 @@ if(!$archive){
 				
 				<div class='number project meta'>
 					<?php
-					$url	= plugins_url('pictures/project.png', __DIR__);
+					$url	= SIM\pathToUrl(MODULE_PATH.'pictures/project.png');
 					echo "<img src='$url' alt='category' loading='lazy' class='project_icon'>";
 					echo get_post_meta(get_the_ID(), 'number', true);
 				echo "</div>";
@@ -119,7 +119,7 @@ if(!$archive){
 
 				if(!empty($ministry)){
 					echo "<div class='ministry project meta'>";
-						$imageUrl = plugins_url('pictures/ministry.png', __DIR__);
+						$imageUrl = SIM\pathToUrl(MODULE_PATH.'pictures/ministry.png');
 						$icon 	= "<img src='$imageUrl' alt='email' loading='lazy' class='project_icon'>";
 						$url	= get_permalink($ministry);
 						$title	= get_the_title($ministry);
@@ -134,7 +134,7 @@ if(!$archive){
 				}
 				
 				echo "<div class='number project meta'>";
-					$imageUrl = plugins_url('pictures/manager.png', __DIR__);
+					$imageUrl = SIM\pathToUrl(MODULE_PATH.'pictures/manager.png');
 					$icon = "<img src='$imageUrl' alt='manager' loading='lazy' class='project_icon'>";
 					if(!empty($manager['userid'])){
 						$userPageUrl		= SIM\maybeGetUserPageUrl($manager['userid']);
@@ -146,7 +146,7 @@ if(!$archive){
 
 				if(!empty($manager['tel'])){
 					echo "<div class='tel project meta'>";
-						$imageUrl = plugins_url('pictures/tel.png', __DIR__);
+						$imageUrl = SIM\pathToUrl(MODULE_PATH.'pictures/tel.png');
 						$icon = "<img src='$imageUrl' alt='telephone' loading='lazy' class='project_icon'>";
 						echo "<a href='tel:{$manager['tel']}'>$icon {$manager['tel']}</a>";
 					echo "</div>";
@@ -154,7 +154,7 @@ if(!$archive){
 
 				if(!empty($manager['email'])){
 					echo "<div class='email project meta'>";
-						$imageUrl = plugins_url('pictures/email.png', __DIR__);
+						$imageUrl = SIM\pathToUrl(MODULE_PATH.'pictures/email.png');
 						$icon = "<img src='$imageUrl' alt='email' loading='lazy' class='project_icon'>";
 						echo "<a href='mailto:{$manager['email']}'>$icon {$manager['email']}</a>";
 					echo "</div>";
@@ -165,7 +165,7 @@ if(!$archive){
 					<?php
 					$url		= get_post_meta(get_the_ID(),'url',true);
 					if(!empty($url)){
-						$imageUrl 	= plugins_url('pictures/url.png', __DIR__);
+						$imageUrl 	= SIM\pathToUrl(MODULE_PATH.'pictures/url.png');
 						$icon 		= "<img src='$imageUrl' alt='project' loading='lazy' class='project_icon'>";
 						echo "<a href='$url'>$icon Visit website  »</a>";
 					}
