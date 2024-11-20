@@ -5,6 +5,7 @@
 - module path constant
 
 ### Changed
+- removed anonymous functions
 
 ### Fixed
 
