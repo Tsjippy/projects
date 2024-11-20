@@ -2,7 +2,8 @@
 namespace SIM\PROJECTS;
 use SIM;
 
-add_action('sim-before-print-content', function($post, $pdf){
+add_action('sim-before-print-content', __NAMESPACE__.'\beforePrint', 10, 2);
+function beforePrint($post, $pdf){
     if($post->post_type != 'project'){
         return;
     }
@@ -46,4 +47,4 @@ add_action('sim-before-print-content', function($post, $pdf){
 
     $pdf->Ln(20);
     $pdf->writeHTML('<b>Description:</b>');
-}, 10, 2);
+}

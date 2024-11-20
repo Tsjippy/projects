@@ -2,12 +2,14 @@
 namespace SIM\PROJECTS;
 use SIM;
     
-add_filter('sim_frontend_posting_modals', function($types){
+add_filter('sim_frontend_posting_modals',  __NAMESPACE__.'\frontendPostingModals');
+function frontendPostingModals($types){
     $types[]	= 'project';
     return $types;
-});
+}
 
-add_action('sim_frontend_post_before_content', function($frontEndContent){
+add_action('sim_frontend_post_before_content',  __NAMESPACE__.'\beforeContent');
+function beforeContent($frontEndContent){
     $categories = get_categories( array(
         'orderby' 	=> 'name',
         'order'   	=> 'ASC',
@@ -16,9 +18,10 @@ add_action('sim_frontend_post_before_content', function($frontEndContent){
     ) );
     
     $frontEndContent->showCategories('project', $categories);
-});
+}
 
-add_action('sim_frontend_post_content_title', function ($postType){
+add_action('sim_frontend_post_content_title',  __NAMESPACE__.'\contentTitle');
+function contentTitle($postType){
     //Property content title
     $class = 'property project';
     if($postType != 'project'){
@@ -28,9 +31,10 @@ add_action('sim_frontend_post_content_title', function ($postType){
     echo "<h4 class='$class' name='project_content_label'>";
         echo 'Please describe the project';
     echo "</h4>";
-});
+}
 
-add_action('sim_after_post_save', function($post, $frontEndPost){
+add_action('sim_after_post_save',  __NAMESPACE__.'\afterPostSave', 10, 2);
+function afterPostSave($post, $frontEndPost){
     if($post->post_type != 'project'){
         return;
     }
@@ -93,10 +97,11 @@ add_action('sim_after_post_save', function($post, $frontEndPost){
             update_metadata( 'post', $post->ID, 'ministry', $_POST['ministry']);
         }
     }
-}, 10, 2);
+}
 
 //add meta data fields
-add_action('sim_frontend_post_after_content', function ($frontendContend){
+add_action('sim_frontend_post_after_content',  __NAMESPACE__.'\afterContent', 10, 2);
+function afterContent($frontendContend){
     if(!empty($frontendContend->post) && $frontendContend->post->post_type != 'project'){
         return;
     }
@@ -240,4 +245,4 @@ add_action('sim_frontend_post_after_content', function ($frontendContend){
         </fieldset>
     </div>
     <?php
-}, 10, 2);
+}
