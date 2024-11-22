@@ -2,14 +2,21 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- module path constant
 
 ### Changed
-- removed anonymous functions
 
 ### Fixed
 
 ### Updated
+
+## [8.0.4] - 2024-11-20
+
+
+### Added
+- module path constant
+
+### Changed
+- removed anonymous functions
 
 ## [8.0.3] - 2024-10-17
 
