@@ -29,13 +29,8 @@ function moduleDescription($description, $moduleSlug){
 }
 
 //run on module activation
-add_filter('sim_module_updated',  __NAMESPACE__.'\moduleUpdated', 10, 2);
-function moduleUpdated($options, $moduleSlug){
-	//module slug should be the same as grandparent folder name
-	if($moduleSlug != MODULE_SLUG){
-		return $options;
-	}
-
+add_filter('sim_module_projects_after_save',  __NAMESPACE__.'\moduleUpdated');
+function moduleUpdated($options){
 	flush_rewrite_rules( true );
 
 	return $options;
