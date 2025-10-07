@@ -28,7 +28,7 @@ function contentTitle($postType){
         $class .= ' hidden';
     }
     
-    echo "<h4 class='$class' name='project_content_label'>";
+    echo "<h4 class='$class'>";
         echo 'Please describe the project';
     echo "</h4>";
 }
@@ -165,16 +165,16 @@ function afterContent($frontendContend){
         }
     </style>
     <div id="project-attributes" class="property project<?php if($postName != 'project'){echo ' hidden';} ?>">
-        <div id="parentpage" class="frontendform">
+        <div id="parentpage" class="frontend-form">
             <h4>Select a parent project</h4>
             <?php
             echo SIM\pageSelect('parent_project', $frontendContend->postParent, '', ['project'], false);
             ?>
         </div>
-        <div class="frontendform">
+        <div class="frontend-form">
             <h4>Update warnings</h4>
             <label>
-                <input type='checkbox' name='static_content' value='static_content' <?php if(!empty($frontendContend->getPostMeta('static_content'))){echo 'checked';}?>>
+                <input type='checkbox' name='static-content' value='static-content' <?php if(!empty($frontendContend->getPostMeta('static_content'))){echo 'checked';}?>>
                 Do not send update warnings for this project
             </label>
         </div>
@@ -187,7 +187,7 @@ function afterContent($frontendContend){
             ?>
         </datalist>
 
-        <fieldset id="project" class="frontendform">
+        <fieldset id="project" class="frontend-form">
             <legend>
                 <h4>Project details</h4>
             </legend>

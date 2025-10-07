@@ -31,12 +31,12 @@ if(!$archive){
 		margin-right: 10px;
 	}
 
-	.cat_card{
+	.cat-card{
 		padding: 10px;
 	}
 </style>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="cat_card<?php if($archive){echo ' inside-article';}?>">
+	<div class="cat-card<?php if($archive){echo ' inside-article';}?>">
 		
 		<?php
 		if($archive){
@@ -111,7 +111,7 @@ if(!$archive){
 				<div class='number project meta'>
 					<?php
 					$url	= SIM\pathToUrl(MODULE_PATH.'pictures/project.png');
-					echo "<img src='$url' alt='category' loading='lazy' class='project_icon'>";
+					echo "<img src='$url' alt='category' loading='lazy' class='project-icon'>";
 					echo get_post_meta(get_the_ID(), 'number', true);
 				echo "</div>";
 
@@ -120,7 +120,7 @@ if(!$archive){
 				if(!empty($ministry)){
 					echo "<div class='ministry project meta'>";
 						$imageUrl = SIM\pathToUrl(MODULE_PATH.'pictures/ministry.png');
-						$icon 	= "<img src='$imageUrl' alt='email' loading='lazy' class='project_icon'>";
+						$icon 	= "<img src='$imageUrl' alt='email' loading='lazy' class='project-icon'>";
 						$url	= get_permalink($ministry);
 						$title	= get_the_title($ministry);
 						echo "<a href='$url'>$icon $title</a><br>";
@@ -135,7 +135,7 @@ if(!$archive){
 				
 				echo "<div class='number project meta'>";
 					$imageUrl = SIM\pathToUrl(MODULE_PATH.'pictures/manager.png');
-					$icon = "<img src='$imageUrl' alt='manager' loading='lazy' class='project_icon'>";
+					$icon = "<img src='$imageUrl' alt='manager' loading='lazy' class='project-icon'>";
 					if(!empty($manager['userid'])){
 						$userPageUrl		= SIM\maybeGetUserPageUrl($manager['userid']);
 						echo "<a href='$userPageUrl'>$icon {$manager['name']}</a>";
@@ -147,7 +147,7 @@ if(!$archive){
 				if(!empty($manager['tel'])){
 					echo "<div class='tel project meta'>";
 						$imageUrl = SIM\pathToUrl(MODULE_PATH.'pictures/tel.png');
-						$icon = "<img src='$imageUrl' alt='telephone' loading='lazy' class='project_icon'>";
+						$icon = "<img src='$imageUrl' alt='telephone' loading='lazy' class='project-icon'>";
 						echo "<a href='tel:{$manager['tel']}'>$icon {$manager['tel']}</a>";
 					echo "</div>";
 				}
@@ -155,7 +155,7 @@ if(!$archive){
 				if(!empty($manager['email'])){
 					echo "<div class='email project meta'>";
 						$imageUrl = SIM\pathToUrl(MODULE_PATH.'pictures/email.png');
-						$icon = "<img src='$imageUrl' alt='email' loading='lazy' class='project_icon'>";
+						$icon = "<img src='$imageUrl' alt='email' loading='lazy' class='project-icon'>";
 						echo "<a href='mailto:{$manager['email']}'>$icon {$manager['email']}</a>";
 					echo "</div>";
 				}
@@ -166,7 +166,7 @@ if(!$archive){
 					$url		= get_post_meta(get_the_ID(),'url',true);
 					if(!empty($url)){
 						$imageUrl 	= SIM\pathToUrl(MODULE_PATH.'pictures/url.png');
-						$icon 		= "<img src='$imageUrl' alt='project' loading='lazy' class='project_icon'>";
+						$icon 		= "<img src='$imageUrl' alt='project' loading='lazy' class='project-icon'>";
 						echo "<a href='$url'>$icon Visit website  »</a>";
 					}
 					?>
