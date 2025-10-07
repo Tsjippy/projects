@@ -136,8 +136,8 @@ if(!$archive){
 				echo "<div class='number project meta'>";
 					$imageUrl = SIM\pathToUrl(MODULE_PATH.'pictures/manager.png');
 					$icon = "<img src='$imageUrl' alt='manager' loading='lazy' class='project-icon'>";
-					if(!empty($manager['userid'])){
-						$userPageUrl		= SIM\maybeGetUserPageUrl($manager['userid']);
+					if(!empty($manager['user-id'])){
+						$userPageUrl		= SIM\maybeGetUserPageUrl($manager['user-id']);
 						echo "<a href='$userPageUrl'>$icon {$manager['name']}</a>";
 					}else{
 						echo $icon.$manager['name'];

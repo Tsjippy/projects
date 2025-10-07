@@ -43,11 +43,11 @@ function afterPostSave($post, $frontEndPost){
     $frontEndPost->storeCustomCategories($post, 'projects');
     
     //parent
-    if(isset($_POST['parent_project'])){
-        if(empty($_POST['parent_project'])){
+    if(isset($_POST['parent-project'])){
+        if(empty($_POST['parent-project'])){
             $parent = 0;
         }else{
-            $parent = $_POST['parent_project'];
+            $parent = $_POST['parent-project'];
         }
 
         wp_update_post(
@@ -114,8 +114,8 @@ function afterContent($frontendContend){
     
     $manager    = (array) $frontendContend->getPostMeta('manager');
     $managerId  = '';
-    if(isset($manager['userid'])){
-        $managerId  = $manager['userid'];
+    if(isset($manager['user-id'])){
+        $managerId  = $manager['user-id'];
     }
 
     $managerName  = '';
@@ -168,7 +168,7 @@ function afterContent($frontendContend){
         <div id="parentpage" class="frontend-form">
             <h4>Select a parent project</h4>
             <?php
-            echo SIM\pageSelect('parent_project', $frontendContend->postParent, '', ['project'], false);
+            echo SIM\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false);
             ?>
         </div>
         <div class="frontend-form">
@@ -202,7 +202,7 @@ function afterContent($frontendContend){
                 <tr>
                     <th><label for="name">Manager name</label></th>
                     <td>
-                        <input type='hidden' class='datalistvalue' name='manager[userid]' value='<?php echo $managerId; ?>'>
+                        <input type='hidden' class='datalistvalue' name='manager[user-id]' value='<?php echo $managerId; ?>'>
                         <input type="text" class='formbuilder' name="manager[name]" value="<?php echo $managerName; ?>" list='users'>
                     </td>
                 </tr>
