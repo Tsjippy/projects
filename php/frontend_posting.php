@@ -202,7 +202,7 @@ function afterContent($frontendContend){
                 <tr>
                     <th><label for="name">Manager name</label></th>
                     <td>
-                        <input type='hidden' class='datalistvalue' name='manager[user-id]' value='<?php echo $managerId; ?>'>
+                        <input type='hidden' class='no-reset' class='datalistvalue' name='manager[user-id]' value='<?php echo $managerId; ?>'>
                         <input type="text" class='formbuilder' name="manager[name]" value="<?php echo $managerName; ?>" list='users'>
                     </td>
                 </tr>
