@@ -10,14 +10,7 @@ function frontendPostingModals($types){
 
 add_action('sim_frontend_post_before_content',  __NAMESPACE__.'\beforeContent');
 function beforeContent($frontEndContent){
-    $categories = get_categories( array(
-        'orderby' 	=> 'name',
-        'order'   	=> 'ASC',
-        'taxonomy'	=> 'projects',
-        'hide_empty'=> false,
-    ) );
-    
-    $frontEndContent->showCategories('project', $categories);
+    $frontEndContent->showCategories('project', 'projects');
 }
 
 add_action('sim_frontend_post_content_title',  __NAMESPACE__.'\contentTitle');
