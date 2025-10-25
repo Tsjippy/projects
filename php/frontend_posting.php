@@ -2,17 +2,6 @@
 namespace SIM\PROJECTS;
 use SIM;
     
-add_filter('sim_frontend_posting_modals',  __NAMESPACE__.'\frontendPostingModals');
-function frontendPostingModals($types){
-    $types[]	= 'project';
-    return $types;
-}
-
-add_action('sim_frontend_post_before_content',  __NAMESPACE__.'\beforeContent');
-function beforeContent($frontEndContent){
-    $frontEndContent->showCategories('project', 'projects');
-}
-
 add_action('sim_frontend_post_content_title',  __NAMESPACE__.'\contentTitle');
 function contentTitle($postType){
     //Property content title
@@ -30,25 +19,6 @@ add_action('sim_after_post_save',  __NAMESPACE__.'\afterPostSave', 10, 2);
 function afterPostSave($post, $frontEndPost){
     if($post->post_type != 'project'){
         return;
-    }
-    
-    //store categories
-    $frontEndPost->storeCustomCategories($post, 'projects');
-    
-    //parent
-    if(isset($_POST['parent-project'])){
-        if(empty($_POST['parent-project'])){
-            $parent = 0;
-        }else{
-            $parent = $_POST['parent-project'];
-        }
-
-        wp_update_post(
-            array(
-                'ID'            => $post->ID,
-                'post_parent'   => $parent
-            )
-        );
     }
 
     //manager
