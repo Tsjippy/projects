@@ -25,7 +25,7 @@ const Edit = ( ) => {
 	useEffect( 
 		 () => {
 			async function getMinistries(){
-				const response = await apiFetch({path: '/sim/v2/projects/ministries?slug=ministry'});
+				const response = await apiFetch({path: '/tsjippy/v2/projects/ministries?slug=ministry'});
 
 				let options	= response.map( c => (
 					{ label: c.post_title, value: c.ID }

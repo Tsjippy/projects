@@ -1,8 +1,8 @@
 <?php
-namespace SIM\PROJECTS;
-use SIM;
+namespace TSJIPPY\PROJECTS;
+use TSJIPPY;
     
-add_action('sim_frontend_post_content_title',  __NAMESPACE__.'\contentTitle');
+add_action('tsjippy_frontend_post_content_title',  __NAMESPACE__.'\contentTitle');
 function contentTitle($postType){
     //Property content title
     $class = 'property project';
@@ -15,7 +15,7 @@ function contentTitle($postType){
     echo "</h4>";
 }
 
-add_action('sim_after_post_save',  __NAMESPACE__.'\afterPostSave', 10, 2);
+add_action('tsjippy_after_post_save',  __NAMESPACE__.'\afterPostSave', 10, 2);
 function afterPostSave($post, $frontEndPost){
     if($post->post_type != 'project'){
         return;
@@ -63,14 +63,14 @@ function afterPostSave($post, $frontEndPost){
 }
 
 //add meta data fields
-add_action('sim_frontend_post_after_content',  __NAMESPACE__.'\afterContent', 10, 2);
+add_action('tsjippy_frontend_post_after_content',  __NAMESPACE__.'\afterContent', 10, 2);
 function afterContent($frontendContend){
     if(!empty($frontendContend->post) && $frontendContend->post->post_type != 'project'){
         return;
     }
 
     //Load js
-    wp_enqueue_script('sim_project_script');
+    wp_enqueue_script('tsjippy_project_script');
 
     $postId     = $frontendContend->postId;
     $postName   = $frontendContend->postName;
@@ -131,7 +131,7 @@ function afterContent($frontendContend){
         <div id="parentpage" class="frontend-form">
             <h4>Select a parent project</h4>
             <?php
-            echo SIM\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false);
+            echo TSJIPPY\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false);
             ?>
         </div>
         <div class="frontend-form">
@@ -144,7 +144,7 @@ function afterContent($frontendContend){
 
         <datalist id="users">
             <?php
-            foreach(SIM\getUserAccounts(false,true,true) as $user){
+            foreach(TSJIPPY\getUserAccounts(false,true,true) as $user){
                 echo "<option data-value='{$user->ID}' value='{$user->display_name}'></option>";
             }
             ?>

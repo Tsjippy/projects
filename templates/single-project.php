@@ -1,6 +1,6 @@
 <?php
-namespace SIM\PROJECTS;
-use SIM;
+namespace TSJIPPY\PROJECTS;
+use TSJIPPY;
 
 /**
  * The Template for displaying all single locations
@@ -39,11 +39,11 @@ if(!isset($skipHeader) || !$skipHeader){
 			</nav>
 			
 			<?php
-			echo apply_filters('sim-single-template-bottom', '', 'project');
+			echo apply_filters('tsjippy-single-template-bottom', '', 'project');
 			?>
 		</main>
 		
-		<?php SIM\showComments(); ?>
+		<?php TSJIPPY\showComments(); ?>
 	</div>
 
 	<?php

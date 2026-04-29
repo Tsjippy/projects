@@ -1,6 +1,6 @@
 <?php
-namespace SIM\PROJECTS;
-use SIM;
+namespace TSJIPPY\PROJECTS;
+use TSJIPPY;
 
 // register custom meta tag field
 add_action( 'init',  __NAMESPACE__.'\blockInit' );
@@ -26,7 +26,7 @@ function blockInit(){
 				],
 				'manager'	=> [
 					'type'		=> 'string',
-					'default'	=> '{"userid":"","name":"","tel":"","email":"","":""}'
+					'default'	=> '{"user_id":"","name":"","tel":"","email":"","":""}'
 				],
 				'ministry'	=> [
 					'type'	=> 'int',

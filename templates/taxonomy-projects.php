@@ -1,6 +1,6 @@
 <?php
-namespace SIM\PROJECTS;
-use SIM;
+namespace TSJIPPY\PROJECTS;
+use TSJIPPY;
 /**
  * The template for displaying all items of a particular category.
  *
@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-wp_enqueue_style('sim_taxonomy_style');
+wp_enqueue_style('tsjippy_taxonomy_style');
 
 global $post;
 global $wp_query;
@@ -42,7 +42,7 @@ if($skipWrapper){
 function displayProjectTax(){
 	$name 				= get_queried_object()->slug;
 	if ( have_posts() ){
-		do_action('sim_before_archive', 'project');
+		do_action('tsjippy_before_archive', 'project');
 	
 		while ( have_posts() ) :
 			the_post();
@@ -56,7 +56,7 @@ function displayProjectTax(){
 		<div class="no-results not-found">
 			<div class="inside-article">
 				<div class="entry-content">
-					<?php echo apply_filters('sim-empty-taxonomy', "There are no $name projects yet", 'project'); ?>
+					<?php echo apply_filters('tsjippy-empty-taxonomy', "There are no $name projects yet", 'project'); ?>
 				</div>
 			</div>
 		</div>

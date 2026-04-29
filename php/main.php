@@ -1,9 +1,9 @@
 <?php
-namespace SIM\PROJECTS;
-use SIM;
+namespace TSJIPPY\PROJECTS;
+use TSJIPPY;
 
 // Create the location custom post type 
 add_action('init', __NAMESPACE__.'\loadAssets', 999);
 function loadAssets(){
-	SIM\registerPostTypeAndTax('project', 'projects');
+	TSJIPPY\registerPostTypeAndTax('project', 'projects');
 }

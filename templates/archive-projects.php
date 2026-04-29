@@ -1,9 +1,9 @@
 <?php
-namespace SIM\PROJECTS;
-use SIM;
+namespace TSJIPPY\PROJECTS;
+use TSJIPPY;
 
 /**
- * The layout specific for the page with the slug 'projects' i.e. sim.org/projects.
+ * The layout specific for the page with the slug 'projects' i.e. org/projects.
  * Displays all the post of the project type
  * 
  */
@@ -17,7 +17,7 @@ if($wp_query->is_embed){
 	$skipWrapper	= true;
 }
 
-wp_enqueue_style('sim_taxonomy_style');
+wp_enqueue_style('tsjippy_taxonomy_style');
 
 if($skipWrapper){
 	displayProjectArchive();
@@ -59,7 +59,7 @@ function displayProjectArchive(){
 	); 
 
 	if ( $query->have_posts() ){
-		do_action('sim_before_archive', 'project');
+		do_action('tsjippy_before_archive', 'project');
 		
 		while ( $query->have_posts() ) :
 			$query->the_post();
@@ -88,7 +88,7 @@ function displayProjectArchive(){
 		<div class="no-results not-found">
 			<div class="inside-article">
 				<div class="entry-content">
-					<?php echo apply_filters('sim-empty-taxonomy', 'There are no projects submitted yet.', 'project'); ?>
+					<?php echo apply_filters('tsjippy-empty-taxonomy', 'There are no projects submitted yet.', 'project'); ?>
 				</div>
 			</div>
 		</div>
