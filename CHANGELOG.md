@@ -4,18 +4,13 @@
 ### Added
 
 ### Changed
+- module to plugin
+- exclude .vscode from releases
+- updated github workflow versions
 
 ### Fixed
 
 ### Updated
-
-## [10.0.0] - 2026-05-01
-
-
-### Changed
-- module to plugin
-- exclude .vscode from releases
-- updated github workflow versions
 
 ## [8.1.0] - 2025-10-30
 
