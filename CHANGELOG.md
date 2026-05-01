@@ -6,6 +6,7 @@
 ### Changed
 - module to plugin
 - exclude .vscode from releases
+- updated github workflow versions
 
 ### Fixed
 
