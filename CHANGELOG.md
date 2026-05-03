@@ -4,15 +4,20 @@
 ### Added
 
 ### Changed
+
+### Fixed
+
+### Updated
+
+## [10.0.1] - 2026-05-03
+
+
+### Changed
 - module to plugin
 - exclude .vscode from releases
 - updated github workflow versions
 - removed the redirection at activation as it is done by the share plugin
 - use shared github workflows
-
-### Fixed
-
-### Updated
 
 ## [8.1.0] - 2025-10-30
 
