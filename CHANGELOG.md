@@ -6,6 +6,7 @@
 ### Changed
 
 ### Fixed
+- get user accounts bug
 
 ### Updated
 
