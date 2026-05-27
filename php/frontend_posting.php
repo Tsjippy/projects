@@ -144,7 +144,7 @@ function afterContent($frontendContend){
 
         <datalist id="users">
             <?php
-            foreach(TSJIPPY\getUserAccounts(false,true,true) as $user){
+            foreach(TSJIPPY\getUserAccounts(false, true) as $user){
                 echo "<option data-value='{$user->ID}' value='{$user->display_name}'></option>";
             }
             ?>
