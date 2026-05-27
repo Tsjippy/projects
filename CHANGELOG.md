@@ -6,9 +6,14 @@
 ### Changed
 
 ### Fixed
-- get user accounts bug
 
 ### Updated
+
+## [10.0.4] - 2026-05-27
+
+
+### Fixed
+- get user accounts bug
 
 ## [10.0.3] - 2026-05-25
 
