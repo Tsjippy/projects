@@ -78,8 +78,8 @@ function displayProjectArchive(){
 				'format' 	=> '/page/%#%',
 				'current' 	=> $currentPage,
 				'total' 	=> $totalPages,
-				'prev_text' => __('« prev'),
-				'next_text' => __('next »'),
+				'prev_text' => __('« prev', 'tsjippy'),
+				'next_text' => __('next »', 'tsjippy'),
 			));
 		}
 	}else{
