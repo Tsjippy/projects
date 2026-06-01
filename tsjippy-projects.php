@@ -4,7 +4,7 @@ namespace TSJIPPY\PROJECTS;
 /**
  * Plugin Name:  		Tsjippy Projects
  * Description:  		This plugin adds a custom post type 'projects'. 
- * Version:      		10.0.5
+ * Version:      		10.0.6
  * Author:       		Ewald Harmsen
  * AuthorURI:			harmseninnigeria.nl
  * Requires at least:	6.3
