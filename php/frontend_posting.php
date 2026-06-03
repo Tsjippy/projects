@@ -184,7 +184,7 @@ function afterContent($frontendContend){
                 <tr>
                     <th><label for="url">Project Url</label></th>
                     <td>
-                        <input type='url' class='formbuilder' name='url' value='<?php echo esc_url($url; ?>'>
+                        <input type='url' class='formbuilder' name='url' value='<?php echo esc_url($url); ?>'>
                     </td>
                 </tr>
                 <tr>
