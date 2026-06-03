@@ -159,32 +159,32 @@ function afterContent($frontendContend){
                 <tr>
                     <th><label for="number">Project Number</label></th>
                     <td>
-                        <input type='number' name='number' value='<?php echo $number; ?>'>
+                        <input type='number' name='number' value='<?php echo esc_attr($number); ?>'>
                     </td>
                 </tr>
                 <tr>
                     <th><label for="name">Manager name</label></th>
                     <td>
-                        <input type='hidden' class='no-reset' class='datalistvalue' name='manager[user-id]' value='<?php echo $managerId; ?>'>
-                        <input type="text" class='formbuilder' name="manager[name]" value="<?php echo $managerName; ?>" list='users'>
+                        <input type='hidden' class='no-reset' class='datalistvalue' name='manager[user-id]' value='<?php echo esc_attr($managerId); ?>'>
+                        <input type="text" class='formbuilder' name="manager[name]" value="<?php echo esc_attr($managerName); ?>" list='users'>
                     </td>
                 </tr>
                 <tr>
                     <th><label for="name">Manager phone number</label></th>
                     <td>
-                        <input type="tel" class='formbuilder' name="manager[tel]" value="<?php echo $managerTel; ?>">
+                        <input type="tel" class='formbuilder' name="manager[tel]" value="<?php echo esc_attr($managerTel); ?>">
                     </td>
                 </tr>
                 <tr>
                     <th><label for="name">Manager e-mail</label></th>
                     <td>
-                        <input type="text" class='formbuilder' name="manager[email]" value="<?php echo $managerEmail; ?>">
+                        <input type="text" class='formbuilder' name="manager[email]" value="<?php echo esc_attr($managerEmail); ?>">
                     </td>
                 </tr>
                 <tr>
                     <th><label for="url">Project Url</label></th>
                     <td>
-                        <input type='url' class='formbuilder' name='url' value='<?php echo $url; ?>'>
+                        <input type='url' class='formbuilder' name='url' value='<?php echo esc_url($url; ?>'>
                     </td>
                 </tr>
                 <tr>
