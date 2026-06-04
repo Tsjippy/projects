@@ -1,71 +1,71 @@
 <?php
 namespace TSJIPPY\PROJECTS;
 use TSJIPPY;
-    
-add_action('tsjippy_frontend_post_content_title',  __NAMESPACE__.'\contentTitle');
-function contentTitle($postType){
+
+add_action('tsjippy_frontend_post_content_title',  __NAMESPACE__ . '\contentTitle');
+function contentTitle($postType) {
     //Property content title
     $class = 'property project';
-    if($postType != 'project'){
+    if ($postType != 'project') {
         $class .= ' hidden';
     }
-    
+
     echo "<h4 class='$class'>";
         echo 'Please describe the project';
     echo "</h4>";
 }
 
-add_action('tsjippy_after_post_save',  __NAMESPACE__.'\afterPostSave', 10, 2);
-function afterPostSave($post, $frontEndPost){
-    if($post->post_type != 'project'){
+add_action('tsjippy_after_post_save',  __NAMESPACE__ . '\afterPostSave', 10, 2);
+function afterPostSave($post, $frontEndPost) {
+    if ($post->post_type != 'project') {
         return;
     }
 
     //manager
-    if(isset($_POST['manager'])){
-        if(empty($_POST['manager'])){
+    if (isset($_POST['manager'])) {
+        if (empty($_POST['manager'])) {
             delete_post_meta($post->ID, 'manager');
         }else{
             //Store manager
-            update_metadata( 'post', $post->ID, 'manager', json_encode($_POST['manager']));
+            update_metadata('post', $post->ID, 'manager', json_encode($_POST['manager']));
         }
     }
 
     // number
-    if(isset($_POST['number'])){
-        if(empty($_POST['number'])){
+    if (isset($_POST['number'])) {
+        if (empty($_POST['number'])) {
             delete_post_meta($post->ID, 'number');
         }else{
             //Store serves
-            update_metadata( 'post', $post->ID, 'number', $_POST['number']);
+            update_metadata('post', $post->ID, 'number', $_POST['number']);
         }
     }
-    
+
     //url
-    if(isset($_POST['url'])){
-        if(empty($_POST['url'])){
+    if (isset($_POST['url'])) {
+        if (empty($_POST['url'])) {
             delete_post_meta($post->ID, 'url');
         }else{
             //Store serves
-            update_metadata( 'post', $post->ID, 'url', $_POST['url']);
+            update_metadata('post', $post->ID, 'url', $_POST['url']);
         }
     }
 
     // ministry
-    if(isset($_POST['ministry'])){
-        if(empty($_POST['ministry'])){
+    if (isset($_POST['ministry'])) {
+        if (empty($_POST['ministry'])) {
             delete_post_meta($post->ID, 'ministry');
         }else{
             //Store serves
-            update_metadata( 'post', $post->ID, 'ministry', $_POST['ministry']);
+            update_metadata('post', $post->ID, 'ministry', $_POST['ministry']);
         }
     }
 }
 
 //add meta data fields
-add_action('tsjippy_frontend_post_after_content',  __NAMESPACE__.'\afterContent', 10, 2);
-function afterContent($frontendContend){
-    if(!empty($frontendContend->post) && $frontendContend->post->post_type != 'project'){
+add_action('tsjippy_frontend_post_after_content',  __NAMESPACE__ . '\afterContent', 10, 2);
+function afterContent($frontendContend) {
+    if (!empty($frontendContend->post) && $frontendContend->post->post_type != 'project') {
         return;
     }
 
@@ -74,25 +74,25 @@ function afterContent($frontendContend){
 
     $postId     = $frontendContend->postId;
     $postName   = $frontendContend->postName;
-    
+
     $manager    = (array) $frontendContend->getPostMeta('manager');
     $managerId  = '';
-    if(isset($manager['user-id'])){
+    if (isset($manager['user-id'])) {
         $managerId  = $manager['user-id'];
     }
 
     $managerName  = '';
-    if(isset($manager['name'])){
+    if (isset($manager['name'])) {
         $managerName  = $manager['name'];
     }
 
     $managerTel  = '';
-    if(isset($manager['tel'])){
+    if (isset($manager['tel'])) {
         $managerTel  = $manager['tel'];
     }
 
     $managerEmail  = '';
-    if(isset($manager['email'])){
+    if (isset($manager['email'])) {
         $managerEmail  = $manager['email'];
     }
 
@@ -101,23 +101,23 @@ function afterContent($frontendContend){
     $number     = $frontendContend->getPostMeta('number');
 
     //Get all pages describing a ministry
-	$ministries = get_posts([
-		'post_type'			=> 'location',
-		'posts_per_page'	=> -1,
-		'post_status'		=> 'publish',
+    $ministries = get_posts([
+        'post_type'            => 'location',
+        'posts_per_page'    => -1,
+        'post_status'        => 'publish',
         'orderby'           => 'title',
         'order'             => 'ASC',
-		'tax_query' => array(
+        'tax_query' => array(
             array(
-                'taxonomy'	=> 'locations',
-				'field' => 'term_id',
-				'terms' => get_term_by('name', 'Ministries', 'locations')->term_id
-            )
-        )
-	]);
+                'taxonomy'    => 'locations',
+                'field' => 'term_id',
+                'terms' => get_term_by('name', 'Ministries', 'locations')->term_id
+           )
+       )
+    ]);
 
     $selectedMinistry = $frontendContend->getPostMeta('ministry');
-    
+
     ?>
     <style>
         .form-table, .form-table th, .form-table, td{
@@ -127,7 +127,7 @@ function afterContent($frontendContend){
             text-align: left;
         }
     </style>
-    <div id="project-attributes" class="property project<?php if($postName != 'project'){echo ' hidden';} ?>">
+    <div id="project-attributes" class="property project<?php if ($postName != 'project') {echo ' hidden';} ?>">
         <div id="parentpage" class="frontend-form">
             <h4>Select a parent project</h4>
             <?php
@@ -137,14 +137,14 @@ function afterContent($frontendContend){
         <div class="frontend-form">
             <h4>Update warnings</h4>
             <label>
-                <input type='checkbox' name='static-content' value='static-content' <?php if(!empty($frontendContend->getPostMeta('static_content'))){echo 'checked';}?>>
+                <input type='checkbox' name='static-content' value='static-content' <?php if (!empty($frontendContend->getPostMeta('static_content'))) {echo 'checked';}?>>
                 Do not send update warnings for this project
             </label>
         </div>
 
         <datalist id="users">
             <?php
-            foreach(TSJIPPY\getUserAccounts(false, true) as $user){
+            foreach (TSJIPPY\getUserAccounts(false, true) as $user) {
                 echo "<option data-value='{$user->ID}' value='{$user->display_name}'></option>";
             }
             ?>
@@ -154,7 +154,7 @@ function afterContent($frontendContend){
             <legend>
                 <h4>Project details</h4>
             </legend>
-        
+
             <table class="form-table">
                 <tr>
                     <th><label for="number">Project Number</label></th>
@@ -193,9 +193,9 @@ function afterContent($frontendContend){
                         <select name='ministry'>
                             <option value=''>---</option>
                             <?php
-                            foreach($ministries as $ministry){
+                            foreach ($ministries as $ministry) {
                                 $selected   = '';
-                                if($ministry->ID == $selectedMinistry){
+                                if ($ministry->ID == $selectedMinistry) {
                                     $selected   = 'selected="selected"';
                                 }
                                 echo "<option value='$ministry->ID' $selected>$ministry->post_title</option>";
