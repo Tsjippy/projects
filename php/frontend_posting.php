@@ -1,9 +1,12 @@
 <?php
+
 namespace TSJIPPY\PROJECTS;
+
 use TSJIPPY;
 
 add_action('tsjippy_frontend_post_content_title',  __NAMESPACE__ . '\contentTitle');
-function contentTitle($postType) {
+function contentTitle($postType)
+{
     //Property content title
     $class = 'property project';
     if ($postType != 'project') {
@@ -11,12 +14,13 @@ function contentTitle($postType) {
     }
 
     echo "<h4 class='$class'>";
-        echo 'Please describe the project';
+    echo 'Please describe the project';
     echo "</h4>";
 }
 
 add_action('tsjippy_after_post_save',  __NAMESPACE__ . '\afterPostSave', 10, 2);
-function afterPostSave($post, $frontEndPost) {
+function afterPostSave($post, $frontEndPost)
+{
     if ($post->post_type != 'project') {
         return;
     }
@@ -25,7 +29,7 @@ function afterPostSave($post, $frontEndPost) {
     if (isset($_POST['manager'])) {
         if (empty($_POST['manager'])) {
             delete_post_meta($post->ID, 'manager');
-        }else{
+        } else {
             //Store manager
             update_metadata('post', $post->ID, 'manager', json_encode($_POST['manager']));
         }
@@ -35,7 +39,7 @@ function afterPostSave($post, $frontEndPost) {
     if (isset($_POST['number'])) {
         if (empty($_POST['number'])) {
             delete_post_meta($post->ID, 'number');
-        }else{
+        } else {
             //Store serves
             update_metadata('post', $post->ID, 'number', $_POST['number']);
         }
@@ -45,7 +49,7 @@ function afterPostSave($post, $frontEndPost) {
     if (isset($_POST['url'])) {
         if (empty($_POST['url'])) {
             delete_post_meta($post->ID, 'url');
-        }else{
+        } else {
             //Store serves
             update_metadata('post', $post->ID, 'url', $_POST['url']);
         }
@@ -55,7 +59,7 @@ function afterPostSave($post, $frontEndPost) {
     if (isset($_POST['ministry'])) {
         if (empty($_POST['ministry'])) {
             delete_post_meta($post->ID, 'ministry');
-        }else{
+        } else {
             //Store serves
             update_metadata('post', $post->ID, 'ministry', $_POST['ministry']);
         }
@@ -64,7 +68,8 @@ function afterPostSave($post, $frontEndPost) {
 
 //add meta data fields
 add_action('tsjippy_frontend_post_after_content',  __NAMESPACE__ . '\afterContent', 10, 2);
-function afterContent($frontendContend) {
+function afterContent($frontendContend)
+{
     if (!empty($frontendContend->post) && $frontendContend->post->post_type != 'project') {
         return;
     }
@@ -112,22 +117,28 @@ function afterContent($frontendContend) {
                 'taxonomy'    => 'locations',
                 'field' => 'term_id',
                 'terms' => get_term_by('name', 'Ministries', 'locations')->term_id
-           )
-       )
+            )
+        )
     ]);
 
     $selectedMinistry = $frontendContend->getPostMeta('ministry');
 
-    ?>
+?>
     <style>
-        .form-table, .form-table th, .form-table, td{
+        .form-table,
+        .form-table th,
+        .form-table,
+        td {
             border: none;
         }
-        .form-table{
+
+        .form-table {
             text-align: left;
         }
     </style>
-    <div id="project-attributes" class="property project<?php if ($postName != 'project') {echo ' hidden';} ?>">
+    <div id="project-attributes" class="property project<?php if ($postName != 'project') {
+                                                            echo ' hidden';
+                                                        } ?>">
         <div id="parentpage" class="frontend-form">
             <h4>Select a parent project</h4>
             <?php
@@ -137,7 +148,9 @@ function afterContent($frontendContend) {
         <div class="frontend-form">
             <h4>Update warnings</h4>
             <label>
-                <input type='checkbox' name='static-content' value='static-content' <?php if (!empty($frontendContend->getPostMeta('static_content'))) {echo 'checked';}?>>
+                <input type='checkbox' name='static-content' value='static-content' <?php if (!empty($frontendContend->getPostMeta('static_content'))) {
+                                                                                        echo 'checked';
+                                                                                    } ?>>
                 Do not send update warnings for this project
             </label>
         </div>
@@ -207,5 +220,5 @@ function afterContent($frontendContend) {
             </table>
         </fieldset>
     </div>
-    <?php
+<?php
 }

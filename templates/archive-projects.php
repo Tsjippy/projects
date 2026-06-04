@@ -1,5 +1,7 @@
 <?php
+
 namespace TSJIPPY\PROJECTS;
+
 use TSJIPPY;
 
 /**
@@ -7,7 +9,7 @@ use TSJIPPY;
  * Displays all the post of the project type
  *
  */
-if ( ! defined('ABSPATH')) {
+if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
@@ -22,12 +24,12 @@ wp_enqueue_style('tsjippy_taxonomy_style');
 
 if ($skipWrapper) {
     displayProjectArchive();
-}else{
+} else {
     if (!isset($skipHeader) || !$skipHeader) {
         get_header();
     }
 
-    ?>
+?>
     <div id="primary">
         <style>
             @media (min-width: 991px) {
@@ -37,7 +39,7 @@ if ($skipWrapper) {
             }
         </style>
         <main id="main" class='inside-article'>
-            <?php displayProjectArchive();?>
+            <?php displayProjectArchive(); ?>
         </main>
     </div>
     <?php
@@ -48,21 +50,24 @@ if ($skipWrapper) {
     }
 }
 
-function displayProjectArchive() {
+function displayProjectArchive()
+{
     //Variable containing the current projects page we are on
     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-    $query = new \WP_Query(array(
-        'post_type'            =>'project',
-        'post_status'        =>'publish',
-        'paged'               => $paged,
-        'posts_per_page'      => 10)
-   );
+    $query = new \WP_Query(
+        array(
+            'post_type'            => 'project',
+            'post_status'        => 'publish',
+            'paged'               => $paged,
+            'posts_per_page'      => 10
+        )
+    );
 
-    if ( $query->have_posts()) {
+    if ($query->have_posts()) {
         do_action('tsjippy_before_archive', 'project');
 
-        while ( $query->have_posts()) :
+        while ($query->have_posts()) :
             $query->the_post();
             include(__DIR__ . '/content.php');
         endwhile;
@@ -80,20 +85,20 @@ function displayProjectArchive() {
                 'total'     => $totalPages,
                 'prev_text' => __('« prev', 'tsjippy'),
                 'next_text' => __('next »', 'tsjippy'),
-           ));
+            ));
         }
-    }else{
+    } else {
         //No projects to show yet
-        ?>
+    ?>
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-        <div class="no-results not-found">
-            <div class="inside-article">
-                <div class="entry-content">
-                    <?php echo apply_filters('tsjippy-empty-taxonomy', 'There are no projects submitted yet. ', 'project'); ?>
+            <div class="no-results not-found">
+                <div class="inside-article">
+                    <div class="entry-content">
+                        <?php echo apply_filters('tsjippy-empty-taxonomy', 'There are no projects submitted yet. ', 'project'); ?>
+                    </div>
                 </div>
             </div>
-        </div>
         </article>
-        <?php
+<?php
     }
 }
