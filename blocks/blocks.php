@@ -74,7 +74,7 @@ function blockRestApiInit()
 {
     //Route for notification messages
     register_rest_route(
-        RESTAPIPREFIX . '/projects',
+        TSJIPPY\RESTAPIPREFIX . '/projects',
         '/ministries',
         array(
             'methods' => 'GET',
