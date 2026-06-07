@@ -31,7 +31,7 @@ function afterPostSave($post, $frontEndPost)
             delete_post_meta($post->ID, 'manager');
         } else {
             //Store manager
-            update_metadata('post', $post->ID, 'manager', json_encode($_POST['manager']));
+            update_metadata('post', $post->ID, 'manager', json_encode(TSJIPPY\sanitize($_POST['manager'])));
         }
     }
 
@@ -41,7 +41,7 @@ function afterPostSave($post, $frontEndPost)
             delete_post_meta($post->ID, 'number');
         } else {
             //Store serves
-            update_metadata('post', $post->ID, 'number', $_POST['number']);
+            update_metadata('post', $post->ID, 'number', TSJIPPY\sanitize($_POST['number']));
         }
     }
 
@@ -51,7 +51,7 @@ function afterPostSave($post, $frontEndPost)
             delete_post_meta($post->ID, 'url');
         } else {
             //Store serves
-            update_metadata('post', $post->ID, 'url', $_POST['url']);
+            update_metadata('post', $post->ID, 'url', TSJIPPY\sanitize($_POST['url'], 'url'));
         }
     }
 
@@ -61,7 +61,7 @@ function afterPostSave($post, $frontEndPost)
             delete_post_meta($post->ID, 'ministry');
         } else {
             //Store serves
-            update_metadata('post', $post->ID, 'ministry', $_POST['ministry']);
+            update_metadata('post', $post->ID, 'ministry', TSJIPPY\sanitize($_POST['ministry']));
         }
     }
 }
@@ -107,16 +107,16 @@ function afterContent($frontendContend)
 
     //Get all pages describing a ministry
     $ministries = get_posts([
-        'post_type'            => 'location',
+        'post_type'         => 'location',
         'posts_per_page'    => -1,
-        'post_status'        => 'publish',
+        'post_status'       => 'publish',
         'orderby'           => 'title',
         'order'             => 'ASC',
         'tax_query' => array(
             array(
-                'taxonomy'    => 'locations',
-                'field' => 'term_id',
-                'terms' => get_term_by('name', 'Ministries', 'locations')->term_id
+                'taxonomy'  => 'locations',
+                'field'     => 'term_id',
+                'terms'     => get_term_by('name', 'Ministries', 'locations')->term_id
             )
         )
     ]);
