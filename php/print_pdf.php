@@ -17,9 +17,9 @@ function beforePrint($post, $pdf)
     $url = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/project.png');
 
     $pdf->printImage($url, 10, -1, 10, 10);
-    $pdf->write(10, get_post_meta(get_the_ID(), 'number', true));
+    $pdf->write(10, get_post_meta(get_the_ID(), 'tsjippy_number', true));
 
-    $manager = get_post_meta(get_the_ID(), 'manager', true);
+    $manager = get_post_meta(get_the_ID(), 'tsjippy_manager', true);
 
     //Manager name
     $url = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/manager.png');
@@ -42,7 +42,7 @@ function beforePrint($post, $pdf)
     //Url
     $imageUrl = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/url.png');
     $y      = $pdf->getY() + 12;
-    $url    = get_post_meta(get_the_ID(), 'url', true);
+    $url    = get_post_meta(get_the_ID(), 'tsjippy_url', true);
     if (!empty($url)) {
         $pdf->printImage($imageUrl, 10, $y, 10, 10);
         $pdf->write(10, $url);

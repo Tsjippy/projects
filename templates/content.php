@@ -105,10 +105,10 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                     <?php
                     $url    = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/project.png');
                     echo "<img src='$url' alt='category' loading='lazy' class='project-icon'>";
-                    echo get_post_meta(get_the_ID(), 'number', true);
+                    echo get_post_meta(get_the_ID(), 'tsjippy_number', true);
                     echo "</div>";
 
-                    $ministry = get_post_meta(get_the_ID(), 'ministry', true);
+                    $ministry = get_post_meta(get_the_ID(), 'tsjippy_ministry', true);
 
                     if (!empty($ministry)) {
                         echo "<div class='ministry project meta'>";
@@ -120,7 +120,7 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                         echo "</div>";
                     }
 
-                    $manager        = get_post_meta(get_the_ID(), 'manager', true);
+                    $manager        = get_post_meta(get_the_ID(), 'tsjippy_manager', true);
 
                     if (!is_array($manager)) {
                         $manager    = json_decode($manager, true);
@@ -156,7 +156,7 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
 
                     <div class='url project meta'>
                         <?php
-                        $url        = get_post_meta(get_the_ID(), 'url', true);
+                        $url        = get_post_meta(get_the_ID(), 'tsjippy_url', true);
                         if (!empty($url)) {
                             $imageUrl     = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/url.png');
                             $icon         = "<img src='$imageUrl' alt='project' loading='lazy' class='project-icon'>";

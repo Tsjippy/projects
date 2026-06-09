@@ -28,40 +28,40 @@ function afterPostSave($post, $frontEndPost)
     //manager
     if (isset($_POST['manager'])) {
         if (empty($_POST['manager'])) {
-            delete_post_meta($post->ID, 'manager');
+            delete_post_meta($post->ID, 'tsjippy_manager');
         } else {
             //Store manager
-            update_metadata('post', $post->ID, 'manager', json_encode(TSJIPPY\sanitize($_POST['manager'])));
+            update_metadata('post', $post->ID, 'tsjippy_manager', json_encode(TSJIPPY\sanitize($_POST['manager'])));
         }
     }
 
     // number
     if (isset($_POST['number'])) {
         if (empty($_POST['number'])) {
-            delete_post_meta($post->ID, 'number');
+            delete_post_meta($post->ID, 'tsjippy_number');
         } else {
             //Store serves
-            update_metadata('post', $post->ID, 'number', TSJIPPY\sanitize($_POST['number']));
+            update_metadata('post', $post->ID, 'tsjippy_number', TSJIPPY\sanitize($_POST['number']));
         }
     }
 
     //url
     if (isset($_POST['url'])) {
         if (empty($_POST['url'])) {
-            delete_post_meta($post->ID, 'url');
+            delete_post_meta($post->ID, 'tsjippy_url');
         } else {
             //Store serves
-            update_metadata('post', $post->ID, 'url', TSJIPPY\sanitize($_POST['url'], 'url'));
+            update_metadata('post', $post->ID, 'tsjippy_url', TSJIPPY\sanitize($_POST['url'], 'url'));
         }
     }
 
     // ministry
     if (isset($_POST['ministry'])) {
         if (empty($_POST['ministry'])) {
-            delete_post_meta($post->ID, 'ministry');
+            delete_post_meta($post->ID, 'tsjippy_ministry');
         } else {
             //Store serves
-            update_metadata('post', $post->ID, 'ministry', TSJIPPY\sanitize($_POST['ministry']));
+            update_metadata('post', $post->ID, 'tsjippy_ministry', TSJIPPY\sanitize($_POST['ministry']));
         }
     }
 }
