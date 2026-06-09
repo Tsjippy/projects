@@ -22,7 +22,7 @@ if (!$archive) {
     $class    = '';
 }
 
-wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPATH . 'css/template.min.css'), array(), STYLEVERSION);
+wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPATH . 'css/template.min.css'), array(), PLUGINVERSION);
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <div class="cat-card<?php if ($archive) {
