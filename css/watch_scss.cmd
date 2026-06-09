@@ -1,0 +1,1 @@
+sass --style=compressed ".\template.scss" "template.min.css"

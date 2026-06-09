@@ -21,22 +21,9 @@ $class    = '';
 if (!$archive) {
     $class    = '';
 }
+
+wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPATH . 'css/template.min.css'), array(), STYLEVERSION);
 ?>
-<style>
-    .metas {
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .project.meta {
-        margin-right: 10px;
-    }
-
-    .cat-card {
-        padding: 10px;
-    }
-</style>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <div class="cat-card<?php if ($archive) {
                             echo ' inside-article';

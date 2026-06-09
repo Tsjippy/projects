@@ -124,18 +124,6 @@ function afterContent($frontendContend)
     $selectedMinistry = $frontendContend->getPostMeta('ministry');
 
 ?>
-    <style>
-        .form-table,
-        .form-table th,
-        .form-table,
-        td {
-            border: none;
-        }
-
-        .form-table {
-            text-align: left;
-        }
-    </style>
     <div id="project-attributes" class="property project<?php if ($postName != 'project') {
                                                             echo ' hidden';
                                                         } ?>">
@@ -168,7 +156,7 @@ function afterContent($frontendContend)
                 <h4>Project details</h4>
             </legend>
 
-            <table class="form-table">
+            <table class="form-table no-border left">
                 <tr>
                     <th><label for="number">Project Number</label></th>
                     <td>
