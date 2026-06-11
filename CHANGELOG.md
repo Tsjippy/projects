@@ -2,14 +2,21 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- placeholder for textdomain
 
 ### Changed
-- prefixed post metas and shortcodes
 
 ### Fixed
 
 ### Updated
+
+## [10.0.9] - 2026-06-11
+
+
+### Added
+- placeholder for textdomain
+
+### Changed
+- prefixed post metas and shortcodes
 
 ## [10.0.8] - 2026-06-09
 
