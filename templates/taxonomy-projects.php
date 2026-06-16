@@ -47,7 +47,7 @@ function displayProjectTax()
 {
     $name                 = get_queried_object()->slug;
     if (have_posts()) {
-        do_action('tsjippy_before_archive', 'project');
+        do_action('tsjippy-before-archive', 'project');
 
         while (have_posts()) :
             the_post();

@@ -34,7 +34,7 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
             $url = get_permalink(get_the_ID());
             echo the_title("<h3 class='archivetitle'><a href='$url'>", '</a></h3>');
         } else {
-            do_action('tsjippy_before_content');
+            do_action('tsjippy-before-content');
         }
         ?>
         <div class='entry-content<?php if ($archive) {
@@ -180,7 +180,7 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                         //Show everything including category specific content
                     } else {
                         if (empty($post->post_content)) {
-                            echo apply_filters('tsjippy_empty_description', 'No content found... ', $post);
+                            echo apply_filters('tsjippy-empty-description', 'No content found... ', $post);
                         }
 
                         the_content();

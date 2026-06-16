@@ -60,7 +60,7 @@ function displayProjectArchive()
     );
 
     if ($query->have_posts()) {
-        do_action('tsjippy_before_archive', 'project');
+        do_action('tsjippy-before-archive', 'project');
 
         while ($query->have_posts()) :
             $query->the_post();
