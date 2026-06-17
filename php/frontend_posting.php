@@ -4,7 +4,7 @@ namespace TSJIPPY\PROJECTS;
 
 use TSJIPPY;
 
-add_action('tsjippy-frontend-post-content-title',  __NAMESPACE__ . '\contentTitle');
+add_action('tsjippy-frontend-content-post-content-title',  __NAMESPACE__ . '\contentTitle');
 function contentTitle($postType)
 {
     //Property content title
@@ -18,7 +18,7 @@ function contentTitle($postType)
     echo "</h4>";
 }
 
-add_action('tsjippy-after-post-save',  __NAMESPACE__ . '\afterPostSave', 10, 2);
+add_action('tsjippy-frontend-content-after-post-save',  __NAMESPACE__ . '\afterPostSave', 10, 2);
 function afterPostSave($post, $frontEndPost)
 {
     if ($post->post_type != 'project') {
@@ -67,7 +67,7 @@ function afterPostSave($post, $frontEndPost)
 }
 
 //add meta data fields
-add_action('tsjippy-frontend-post-after-content',  __NAMESPACE__ . '\afterContent', 10, 2);
+add_action('tsjippy-frontend-content-post-after-content',  __NAMESPACE__ . '\afterContent', 10, 2);
 function afterContent($frontendContend)
 {
     if (!empty($frontendContend->post) && $frontendContend->post->post_type != 'project') {

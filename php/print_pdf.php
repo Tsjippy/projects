@@ -4,7 +4,7 @@ namespace TSJIPPY\PROJECTS;
 
 use TSJIPPY;
 
-add_action('tsjippy-before-print-content', __NAMESPACE__ . '\beforePrint', 10, 2);
+add_action('tsjippy-pdf-before-print-content', __NAMESPACE__ . '\beforePrint', 10, 2);
 function beforePrint($post, $pdf)
 {
     if ($post->post_type != 'project') {
