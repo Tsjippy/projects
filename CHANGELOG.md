@@ -4,12 +4,17 @@
 ### Added
 
 ### Changed
-- hook and filter name update
-- prefix all hooks with plugin name
 
 ### Fixed
 
 ### Updated
+
+## [10.1.5] - 2026-06-18
+
+
+### Changed
+- hook and filter name update
+- prefix all hooks with plugin name
 
 ## [10.1.4] - 2026-06-15
 
