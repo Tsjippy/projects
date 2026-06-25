@@ -18,50 +18,57 @@ function contentTitle($postType)
     echo "</h4>";
 }
 
-add_action('tsjippy-frontend-content-after-post-save',  __NAMESPACE__ . '\afterPostSave', 10, 2);
-function afterPostSave($post, $frontEndPost)
+/**
+ * Allow comments
+ * 
+ * @param   \WP_Post    $post       The new or updated post
+ * @param   object      $object     FrontEndContent Instance
+ * @param   array       $request    The sanitized request data
+ */
+add_action('tsjippy-frontend-content-after-post-save',  __NAMESPACE__ . '\afterPostSave', 10, 3);
+function afterPostSave($post, $frontEndPost, $request)
 {
     if ($post->post_type != 'project') {
         return;
     }
 
     //manager
-    if (isset($_POST['manager'])) {
-        if (empty($_POST['manager'])) {
+    if (isset($request['manager'])) {
+        if (empty($request['manager'])) {
             delete_post_meta($post->ID, 'tsjippy_manager');
         } else {
             //Store manager
-            update_metadata('post', $post->ID, 'tsjippy_manager', json_encode(TSJIPPY\sanitize($_POST['manager'])));
+            update_metadata('post', $post->ID, 'tsjippy_manager', json_encode($request['manager']));
         }
     }
 
     // number
-    if (isset($_POST['number'])) {
-        if (empty($_POST['number'])) {
+    if (isset($request['number'])) {
+        if (empty($request['number'])) {
             delete_post_meta($post->ID, 'tsjippy_number');
         } else {
             //Store serves
-            update_metadata('post', $post->ID, 'tsjippy_number', TSJIPPY\sanitize($_POST['number']));
+            update_metadata('post', $post->ID, 'tsjippy_number', $request['number']);
         }
     }
 
     //url
-    if (isset($_POST['url'])) {
-        if (empty($_POST['url'])) {
+    if (isset($request['url'])) {
+        if (empty($request['url'])) {
             delete_post_meta($post->ID, 'tsjippy_url');
         } else {
             //Store serves
-            update_metadata('post', $post->ID, 'tsjippy_url', TSJIPPY\sanitize($_POST['url'], 'url'));
+            update_metadata('post', $post->ID, 'tsjippy_url', $request['url']);
         }
     }
 
     // ministry
-    if (isset($_POST['ministry'])) {
-        if (empty($_POST['ministry'])) {
+    if (isset($request['ministry'])) {
+        if (empty($request['ministry'])) {
             delete_post_meta($post->ID, 'tsjippy_ministry');
         } else {
             //Store serves
-            update_metadata('post', $post->ID, 'tsjippy_ministry', TSJIPPY\sanitize($_POST['ministry']));
+            update_metadata('post', $post->ID, 'tsjippy_ministry', $request['ministry']);
         }
     }
 }
