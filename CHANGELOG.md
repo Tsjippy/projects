@@ -6,6 +6,7 @@
 ### Changed
 - wrapped front-end options in a collapsible
 - frontend content hook
+- pass sanitized request to tsjippy-frontend-content-after-post-save
 
 ### Fixed
 
