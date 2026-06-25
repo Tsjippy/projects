@@ -76,8 +76,6 @@ function afterContent($frontendContend)
 
     //Load js
     wp_enqueue_script('tsjippy_project_script');
-
-    $postId     = $frontendContend->postId;
     $postName   = $frontendContend->postName;
 
     $manager    = (array) $frontendContend->getPostMeta('manager');
@@ -124,21 +122,38 @@ function afterContent($frontendContend)
     $selectedMinistry = $frontendContend->getPostMeta('ministry');
 
 ?>
-    <div id="project-attributes" class="property project<?php if ($postName != 'project') {
-                                                            echo ' hidden';
-                                                        } ?>">
-        <div id="parentpage" class="frontend-form">
-            <h4>Select a parent project</h4>
-            <?php
-            echo TSJIPPY\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false);
-            ?>
+    <div
+        id="project-attributes"
+        class="property project v
+    <?php if ($postName != 'project') {
+        echo ' hidden';
+    } ?>">
+        <div id="parentpage" class="frontend-form expand-wrapper">
+            <h4>
+                Select a parent project
+                <button class="button small expand" type='button'>&#9660;</button>
+            </h4>
+
+            <div class="hidden expandable">
+                <?php
+                echo TSJIPPY\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false);
+                ?>
+            </div>
         </div>
-        <div class="frontend-form">
-            <h4>Update warnings</h4>
-            <label>
-                <input type='checkbox' name='static-content' value='static-content' <?php if (!empty($frontendContend->getPostMeta('static_content'))) {
-                                                                                        echo 'checked';
-                                                                                    } ?>>
+
+        <div class="frontend-form expand-wrapper">
+            <h4>
+                Update warnings
+                <button class="button small expand" type='button'>&#9660;</button>
+            </h4>
+            <label class="hidden expandable">
+                <input
+                    type='checkbox'
+                    name='static-content'
+                    value='static-content'
+                    <?php if (!empty($frontendContend->getPostMeta('static_content'))) {
+                        echo 'checked';
+                    } ?>>
                 Do not send update warnings for this project
             </label>
         </div>
@@ -151,12 +166,15 @@ function afterContent($frontendContend)
             ?>
         </datalist>
 
-        <fieldset id="project" class="frontend-form">
+        <fieldset id="project" class="frontend-form expand-wrapper">
             <legend>
-                <h4>Project details</h4>
+                <h4>
+                    Project details
+                    <button class="button small expand" type='button'>&#9660;</button>
+                </h4>
             </legend>
 
-            <table class="form-table no-border left">
+            <table class="form-table no-border left hidden expandable">
                 <tr>
                     <th><label for="number">Project Number</label></th>
                     <td>
@@ -195,11 +213,15 @@ function afterContent($frontendContend)
                             <option value=''>---</option>
                             <?php
                             foreach ($ministries as $ministry) {
-                                $selected   = '';
-                                if ($ministry->ID == $selectedMinistry) {
-                                    $selected   = 'selected="selected"';
-                                }
-                                echo "<option value='$ministry->ID' $selected>$ministry->post_title</option>";
+                            ?>
+                                <option
+                                    value='<?php echo esc_attr($ministry->ID); ?>'
+                                    <?php if ($ministry->ID == $selectedMinistry) {
+                                        echo 'selected="selected"';
+                                    } ?>>
+                                    <?php echo esc_html($ministry->post_title); ?>
+                                </option>
+                            <?php
                             }
                             ?>
                         </select>
