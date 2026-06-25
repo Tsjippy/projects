@@ -67,7 +67,7 @@ function afterPostSave($post, $frontEndPost)
 }
 
 //add meta data fields
-add_action('tsjippy-frontend-content-post-after-content',  __NAMESPACE__ . '\afterContent', 10, 2);
+add_action('tsjippy-frontend-content-post-before-default-options-content',  __NAMESPACE__ . '\afterContent', 10, 2);
 function afterContent($frontendContend)
 {
     if (!empty($frontendContend->post) && $frontendContend->post->post_type != 'project') {
@@ -128,53 +128,15 @@ function afterContent($frontendContend)
     <?php if ($postName != 'project') {
         echo ' hidden';
     } ?>">
-        <div id="parentpage" class="frontend-form expand-wrapper">
-            <h4>
-                Select a parent project
-                <button class="button small expand" type='button'>&#9660;</button>
-            </h4>
 
-            <div class="hidden expandable">
-                <?php
-                echo TSJIPPY\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false);
-                ?>
-            </div>
-        </div>
-
-        <div class="frontend-form expand-wrapper">
-            <h4>
-                Update warnings
-                <button class="button small expand" type='button'>&#9660;</button>
-            </h4>
-            <label class="hidden expandable">
-                <input
-                    type='checkbox'
-                    name='static-content'
-                    value='static-content'
-                    <?php if (!empty($frontendContend->getPostMeta('static_content'))) {
-                        echo 'checked';
-                    } ?>>
-                Do not send update warnings for this project
-            </label>
-        </div>
-
-        <datalist id="users">
-            <?php
-            foreach (TSJIPPY\getUserAccounts(false, true) as $user) {
-                echo "<option data-value='{$user->ID}' value='{$user->display_name}'></option>";
-            }
-            ?>
-        </datalist>
-
-        <fieldset id="project" class="frontend-form expand-wrapper">
+        <fieldset id="project" class="frontend-form">
             <legend>
                 <h4>
                     Project details
-                    <button class="button small expand" type='button'>&#9660;</button>
                 </h4>
             </legend>
 
-            <table class="form-table no-border left hidden expandable">
+            <table class="form-table no-border left">
                 <tr>
                     <th><label for="number">Project Number</label></th>
                     <td>
@@ -229,6 +191,45 @@ function afterContent($frontendContend)
                 </tr>
             </table>
         </fieldset>
+
+        
+        <div id="parentpage" class="frontend-form expand-wrapper">
+            <h4>
+                Parent project
+                <button class="button small expand" type='button'>&#9660;</button>
+            </h4>
+
+            <div class="hidden expandable">
+                <?php
+                echo TSJIPPY\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false);
+                ?>
+            </div>
+        </div>
+
+        <div class="frontend-form expand-wrapper">
+            <h4>
+                Update warnings
+                <button class="button small expand" type='button'>&#9660;</button>
+            </h4>
+            <label class="hidden expandable">
+                <input
+                    type='checkbox'
+                    name='static-content'
+                    value='static-content'
+                    <?php if (!empty($frontendContend->getPostMeta('static_content'))) {
+                        echo 'checked';
+                    } ?>>
+                Do not send update warnings for this project
+            </label>
+        </div>
+
+        <datalist id="users">
+            <?php
+            foreach (TSJIPPY\getUserAccounts(false, true) as $user) {
+                echo "<option data-value='{$user->ID}' value='{$user->display_name}'></option>";
+            }
+            ?>
+        </datalist>
     </div>
 <?php
 }
