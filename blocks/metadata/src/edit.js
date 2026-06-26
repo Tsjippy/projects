@@ -50,7 +50,7 @@ const Edit = () => {
     let newMeta = { ...meta };
     if (key.startsWith("manager")) {
       let subkey = key.split("-")[1];
-      key = "manager";
+      key = "tsjippy_manager";
       let newManager = {};
 
       if (manager != "") {
@@ -74,7 +74,7 @@ const Edit = () => {
         isPressEnterToChange={true}
         label={__("Project number")}
         value={number}
-        onChange={(value) => updateMetaValue(value, "number")}
+        onChange={(value) => updateMetaValue(value, "tsjippy_number")}
       />
 
       <InputControl
@@ -102,14 +102,14 @@ const Edit = () => {
         isPressEnterToChange={true}
         label={__("Website url")}
         value={url}
-        onChange={(value) => updateMetaValue(value, "url")}
+        onChange={(value) => updateMetaValue(value, "tsjippy_url")}
       />
 
       <SelectControl
         label="Ministry"
         value={ministry}
         options={ministries}
-        onChange={(value) => updateMetaValue(value, "ministry")}
+        onChange={(value) => updateMetaValue(value, "tsjippy_ministry")}
         __nextHasNoMarginBottom
       />
     </div>
