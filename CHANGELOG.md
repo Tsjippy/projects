@@ -4,14 +4,21 @@
 ### Added
 
 ### Changed
+
+### Fixed
+
+### Updated
+
+## [10.2.5] - 2026-06-26
+
+
+### Changed
 - wrapped front-end options in a collapsible
 - frontend content hook
 - pass sanitized request to tsjippy-frontend-content-after-post-save
 
 ### Fixed
 - non-prefixd post meta's
-
-### Updated
 
 ## [10.2.3] - 2026-06-24
 
