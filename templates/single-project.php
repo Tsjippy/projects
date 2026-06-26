@@ -37,7 +37,7 @@ wp_enqueue_style('tsjippy_template');
         </nav>
 
         <?php
-        echo apply_filters('tsjippy-single-template-bottom', '', 'project');
+        echo wp_kses_post(apply_filters('tsjippy-single-template-bottom', '', 'project'));
         ?>
     </main>
 

@@ -25,21 +25,17 @@ if (!$archive) {
 wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPATH . 'css/template.min.css'), array(), PLUGINVERSION);
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <div class="cat-card<?php if ($archive) {
-                            echo ' inside-article';
-                        } ?>">
+    <div class="cat-card<?php if ($archive) echo ' inside-article'; ?>">
 
         <?php
         if ($archive) {
             $url = get_permalink(get_the_ID());
-            echo the_title("<h3 class='archivetitle'><a href='$url'>", '</a></h3>');
+ echo the_title("<h3 class='archivetitle'><a href='$url'>", '</a></h3>');
         } else {
             do_action('tsjippy-before-content');
         }
         ?>
-        <div class='entry-content<?php if ($archive) {
-                                        echo ' archive';
-                                    } ?>'>
+        <div class='entry-content<?php if ($archive) echo ' archive'; ?>'>
             <?php
             if (is_user_logged_in()) {
             ?>
@@ -92,8 +88,11 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                         //Only show the category if all of its subcats are not there
                         $url = get_term_link($id);
                         $category = ucfirst($category);
-                        echo "<a href='$url'>$category</a>";
-
+                        ?>
+                        <a href='<?php echo esc_url($url);?>'>
+                            <?php echo esc_html($category);?>
+                        </a>
+                        <?php
                         if ($id != $lastKey) {
                             echo ', ';
                         }
@@ -104,20 +103,24 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                 <div class='number project meta'>
                     <?php
                     $url    = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/project.png');
-                    echo "<img src='$url' alt='category' loading='lazy' class='project-icon'>";
-                    echo get_post_meta(get_the_ID(), 'tsjippy_number', true);
-                    echo "</div>";
+                    ?>
+                    <img src='<?php echo esc_url($url);?>' alt='category' loading='lazy' class='project-icon'>
+                    echo <?php echo esc_html(get_post_meta(get_the_ID(), 'tsjippy_number', true));?>;
+                </div>
+                <?php
 
                     $ministry = get_post_meta(get_the_ID(), 'tsjippy_ministry', true);
 
                     if (!empty($ministry)) {
-                        echo "<div class='ministry project meta'>";
-                        $imageUrl = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/ministry.png');
-                        $icon     = "<img src='$imageUrl' alt='email' loading='lazy' class='project-icon'>";
-                        $url    = get_permalink($ministry);
-                        $title    = get_the_title($ministry);
-                        echo "<a href='$url'>$icon $title</a><br>";
-                        echo "</div>";
+                        ?>
+                        <div class='ministry project meta'>
+                            <a href='<?php echo esc_url(get_permalink($ministry));?>'>
+                                <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/ministry.png'));?>' alt='email' loading='lazy' class='project-icon'>
+                                 <?php echo esc_html(get_the_title($ministry));?>
+                            </a>
+                            <br>
+                        </div>
+                        <?php
                     }
 
                     $manager        = get_post_meta(get_the_ID(), 'tsjippy_manager', true);
@@ -125,32 +128,44 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                     if (!is_array($manager)) {
                         $manager    = json_decode($manager, true);
                     }
+                    ?>
+                    <div class='number project meta'>
+                        <?php
+                        if (!empty($manager['user-id'])) {
+                            ?>
+                            <a href='<?php echo esc_url(TSJIPPY\maybeGetUserPageUrl($manager['user-id']));?>'>
+                            <?php
+                        }
+                        ?>
+                                <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/manager.png'));?>' alt='manager' loading='lazy' class='project-icon'>
+                                <?php echo esc_html($manager['name']);
+                        if (!empty($manager['user-id'])) {
+                            ?>
+                            </a>
+                            <?php
+                        }
+                        ?>
+                    </div>
 
-                    echo "<div class='number project meta'>";
-                    $imageUrl = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/manager.png');
-                    $icon = "<img src='$imageUrl' alt='manager' loading='lazy' class='project-icon'>";
-                    if (!empty($manager['user-id'])) {
-                        $userPageUrl        = TSJIPPY\maybeGetUserPageUrl($manager['user-id']);
-                        echo "<a href='$userPageUrl'>$icon {$manager['name']}</a>";
-                    } else {
-                        echo $icon . $manager['name'];
-                    }
-                    echo "</div>";
-
+                    <?php
                     if (!empty($manager['tel'])) {
-                        echo "<div class='tel project meta'>";
-                        $imageUrl = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/tel.png');
-                        $icon = "<img src='$imageUrl' alt='telephone' loading='lazy' class='project-icon'>";
-                        echo "<a href='tel:{$manager['tel']}'>$icon {$manager['tel']}</a>";
-                        echo "</div>";
+                        ?>
+                        <div class='tel project meta'>
+                            <a href='tel:<?php echo esc_url($manager['tel']);?>'>
+                                <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/tel.png'));?>' alt='telephone' loading='lazy' class='project-icon'> <?php echo esc_html($manager['tel']);?>
+                            </a>
+                        </div>
+                        <?php
                     }
 
                     if (!empty($manager['email'])) {
-                        echo "<div class='email project meta'>";
-                        $imageUrl = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/email.png');
-                        $icon = "<img src='$imageUrl' alt='email' loading='lazy' class='project-icon'>";
-                        echo "<a href='mailto:{$manager['email']}'>$icon {$manager['email']}</a>";
-                        echo "</div>";
+                        ?>
+                        <div class='email project meta'>
+                            <a href='mailto:<?php echo esc_url($manager['email']);?>'>
+                                <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/email.png'));?>' alt='email' loading='lazy' class='project-icon'> <?php echo esc_html($manager['email']);?>
+                            </a>
+                        </div>
+                        <?php
                     }
                     ?>
 
@@ -158,9 +173,11 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                         <?php
                         $url        = get_post_meta(get_the_ID(), 'tsjippy_url', true);
                         if (!empty($url)) {
-                            $imageUrl     = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/url.png');
-                            $icon         = "<img src='$imageUrl' alt='project' loading='lazy' class='project-icon'>";
-                            echo "<a href='$url'>$icon Visit website  »</a>";
+                            ?>
+                            <a href='<?php echo esc_url($url);?>'>
+                                <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/url.png'));?>' alt='project' loading='lazy' class='project-icon'> Visit website  »
+                            </a>
+                            <?php
                         }
                         ?>
                     </div>
@@ -172,15 +189,20 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                     if ($archive) {
                         $excerpt =  force_balance_tags(wp_kses_post(get_the_excerpt()));
                         if (empty($excerpt)) {
-                            $url = get_permalink();
-                            echo "<br><a href='$url'>View description »</a>";
+                            ?>
+                            <br>
+                            <a href='<?php echo esc_url(get_permalink());?>'>
+                                View description »
+                            </a>
+                            <?php
                         } else {
-                            echo $excerpt;
+                            echo wp_kses_post($excerpt);
                         }
                         //Show everything including category specific content
                     } else {
                         if (empty($post->post_content)) {
-                            echo apply_filters('tsjippy-empty-description', 'No content found... ', $post);
+                            /** @disregard */
+                            echo wp_kses_post(apply_filters('tsjippy-empty-description', 'No content found... ', $post));
                         }
 
                         the_content();

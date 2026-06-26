@@ -13,9 +13,11 @@ function contentTitle($postType)
         $class .= ' hidden';
     }
 
-    echo "<h4 class='$class'>";
-    echo 'Please describe the project';
-    echo "</h4>";
+    ?>
+    <h4 class='<?php esc_attr($class);?>'>
+        Please describe the project
+    </h4>
+    <?php
 }
 
 /**
@@ -132,9 +134,7 @@ function afterContent($frontendContend)
     <div
         id="project-attributes"
         class="property project v
-    <?php if ($postName != 'project') {
-        echo ' hidden';
-    } ?>">
+    <?php if ($postName != 'project') echo ' hidden'; ?>">
 
         <fieldset id="project" class="frontend-form">
             <legend>
@@ -185,9 +185,7 @@ function afterContent($frontendContend)
                             ?>
                                 <option
                                     value='<?php echo esc_attr($ministry->ID); ?>'
-                                    <?php if ($ministry->ID == $selectedMinistry) {
-                                        echo 'selected="selected"';
-                                    } ?>>
+                                    <?php if ($ministry->ID == $selectedMinistry) echo 'selected="selected"'; ?>>
                                     <?php echo esc_html($ministry->post_title); ?>
                                 </option>
                             <?php
@@ -208,7 +206,7 @@ function afterContent($frontendContend)
 
             <div class="hidden expandable">
                 <?php
-                echo TSJIPPY\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false);
+                TSJIPPY\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false, true);
                 ?>
             </div>
         </div>
@@ -223,9 +221,7 @@ function afterContent($frontendContend)
                     type='checkbox'
                     name='static-content'
                     value='static-content'
-                    <?php if (!empty($frontendContend->getPostMeta('static_content'))) {
-                        echo 'checked';
-                    } ?>>
+                    <?php if (!empty($frontendContend->getPostMeta('static_content'))) echo 'checked'; ?>>
                 Do not send update warnings for this project
             </label>
         </div>
@@ -233,7 +229,10 @@ function afterContent($frontendContend)
         <datalist id="users">
             <?php
             foreach (TSJIPPY\getUserAccounts(false, true) as $user) {
-                echo "<option data-value='{$user->ID}' value='{$user->display_name}'></option>";
+                ?>
+                <option data-value='<?php echo esc_attr($user->ID);?>' value='<?php echo esc_attr($user->display_name);?>'>
+                </option>
+                <?php
             }
             ?>
         </datalist>

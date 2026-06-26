@@ -61,7 +61,7 @@ function displayProjectTax()
             <div class="no-results not-found">
                 <div class="inside-article">
                     <div class="entry-content">
-                        <?php echo apply_filters('tsjippy-empty-taxonomy', "There are no $name projects yet", 'project'); ?>
+                        <?php echo wp_kses_post(apply_filters('tsjippy-empty-taxonomy', "There are no $name projects yet", 'project')); ?>
                     </div>
                 </div>
             </div>
