@@ -39,31 +39,31 @@ function blockInit()
         )
     );
 
-    register_post_meta('project', 'number', array(
-        'show_in_rest'         => true,
-        'single'             => true,
-        'type'                 => 'string',
+    register_post_meta('project', "tsjippy_number", array(
+        'show_in_rest'      => true,
+        'single'            => true,
+        'type'              => 'string',
         'sanitize_callback' => 'sanitize_text_field'
     ));
 
-    register_post_meta('project', 'url', array(
-        'show_in_rest'         => true,
-        'single'             => true,
-        'type'                 => 'string',
+    register_post_meta('project', "tsjippy_url", array(
+        'show_in_rest'      => true,
+        'single'            => true,
+        'type'              => 'string',
         'sanitize_callback' => 'sanitize_text_field'
     ));
 
-    register_post_meta('project', 'manager', array(
-        'show_in_rest'         => true,
-        'single'             => true,
-        'type'                 => 'string',
+    register_post_meta('project', "tsjippy_manager", array(
+        'show_in_rest'      => true,
+        'single'            => true,
+        'type'              => 'string',
         'sanitize_callback' => 'sanitize_text_field'
     ));
 
-    register_post_meta('project', 'ministry', array(
-        'show_in_rest'         => true,
-        'single'             => true,
-        'type'                 => 'string',
+    register_post_meta('project', "tsjippy_ministry", array(
+        'show_in_rest'      => true,
+        'single'            => true,
+        'type'              => 'string',
         'sanitize_callback' => 'sanitize_text_field'
     ));
 }
