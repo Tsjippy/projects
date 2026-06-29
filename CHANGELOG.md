@@ -6,6 +6,7 @@
 
 ### Changed
 - plugin tested up to 7.0
+- use get_author_posts_url
 
 ### Fixed
 
