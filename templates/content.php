@@ -40,7 +40,7 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
             if (is_user_logged_in()) {
             ?>
                 <div class='author'>
-                    Shared by: <a href='<?php echo TSJIPPY\maybeGetUserPageUrl(get_the_author_meta('ID')) ?>'><?php the_author(); ?></a>
+                    Shared by: <a href='<?php echo get_author_posts_url(get_the_author_meta('ID')) ?>'><?php the_author(); ?></a>
                 </div>
                 <?php
                 if ($archive) {
@@ -133,7 +133,7 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                         <?php
                         if (!empty($manager['user-id'])) {
                             ?>
-                            <a href='<?php echo esc_url(TSJIPPY\maybeGetUserPageUrl($manager['user-id']));?>'>
+                            <a href='<?php echo esc_url(get_author_posts_url($manager['user-id']));?>'>
                             <?php
                         }
                         ?>
