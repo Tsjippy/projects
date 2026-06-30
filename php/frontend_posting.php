@@ -14,7 +14,7 @@ function contentTitle($postType)
     }
 
     ?>
-    <h4 class='<?php esc_attr($class);?>'>
+    <h4 class='<?php echo esc_attr($class);?>'>
         Please describe the project
     </h4>
     <?php
