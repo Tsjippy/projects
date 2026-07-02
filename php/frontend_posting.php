@@ -87,7 +87,7 @@ function afterContent($frontendContend)
     wp_enqueue_script('tsjippy_project_script');
     $postName   = $frontendContend->postName;
 
-    $manager    = (array) $frontendContend->getPostMeta('manager');
+    $manager    = $frontendContend->getPostMeta('manager', []);
     $managerId  = '';
     if (isset($manager['user-id'])) {
         $managerId  = $manager['user-id'];
@@ -108,9 +108,9 @@ function afterContent($frontendContend)
         $managerEmail  = $manager['email'];
     }
 
-    $url        = $frontendContend->getPostMeta('url');
+    $url        = $frontendContend->getPostMeta('url', '');
 
-    $number     = $frontendContend->getPostMeta('number');
+    $number     = $frontendContend->getPostMeta('number', '');
 
     //Get all pages describing a ministry
     $ministries = get_posts([
@@ -128,7 +128,7 @@ function afterContent($frontendContend)
         )
     ]);
 
-    $selectedMinistry = $frontendContend->getPostMeta('ministry');
+    $selectedMinistry = $frontendContend->getPostMeta('ministry', '');
 
 ?>
     <div
@@ -221,7 +221,7 @@ function afterContent($frontendContend)
                     type='checkbox'
                     name='static-content'
                     value='static-content'
-                    <?php if (!empty($frontendContend->getPostMeta('static_content'))) echo 'checked'; ?>>
+                    <?php if (!empty($frontendContend->getPostMeta('static_content', ''))) echo 'checked'; ?>>
                 Do not send update warnings for this project
             </label>
         </div>
