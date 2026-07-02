@@ -13,11 +13,11 @@ function contentTitle($postType)
         $class .= ' hidden';
     }
 
-    ?>
-    <h4 class='<?php echo esc_attr($class);?>'>
+?>
+    <h4 class='<?php echo esc_attr($class); ?>'>
         Please describe the project
     </h4>
-    <?php
+<?php
 }
 
 /**
@@ -75,7 +75,7 @@ function afterPostSave($post, $frontEndPost, $request)
     }
 }
 
-//add meta data fields
+//add meta data fields before any other
 add_action('tsjippy-frontend-content-post-before-default-options-content',  __NAMESPACE__ . '\afterContent', 10, 2);
 function afterContent($frontendContend)
 {
@@ -131,10 +131,7 @@ function afterContent($frontendContend)
     $selectedMinistry = $frontendContend->getPostMeta('ministry', '');
 
 ?>
-    <div
-        id="project-attributes"
-        class="property project v
-    <?php if ($postName != 'project') echo ' hidden'; ?>">
+    <div id="project-attributes" class="property project <?php if ($postName != 'project') echo ' hidden'; ?>">
 
         <fieldset id="project" class="frontend-form">
             <legend>
@@ -197,45 +194,74 @@ function afterContent($frontendContend)
             </table>
         </fieldset>
 
-        
-        <div id="parentpage" class="frontend-form expand-wrapper">
-            <h4>
-                Parent project
-                <button class="button small expand" type='button'>&#9660;</button>
-            </h4>
-
-            <div class="hidden expandable">
-                <?php
-                TSJIPPY\pageSelect('parent-project', $frontendContend->postParent, '', ['project'], false, true);
-                ?>
-            </div>
-        </div>
-
-        <div class="frontend-form expand-wrapper">
-            <h4>
-                Update warnings
-                <button class="button small expand" type='button'>&#9660;</button>
-            </h4>
-            <label class="hidden expandable">
-                <input
-                    type='checkbox'
-                    name='static-content'
-                    value='static-content'
-                    <?php if (!empty($frontendContend->getPostMeta('static_content', ''))) echo 'checked'; ?>>
-                Do not send update warnings for this project
-            </label>
-        </div>
-
         <datalist id="users">
             <?php
             foreach (TSJIPPY\getUserAccounts(false, true) as $user) {
-                ?>
-                <option data-value='<?php echo esc_attr($user->ID);?>' value='<?php echo esc_attr($user->display_name);?>'>
+            ?>
+                <option data-value='<?php echo esc_attr($user->ID); ?>' value='<?php echo esc_attr($user->display_name); ?>'>
                 </option>
-                <?php
+            <?php
             }
             ?>
         </datalist>
     </div>
+<?php
+}
+
+
+//add meta data fields
+add_action('tsjippy-frontend-content-post-after-content',  __NAMESPACE__ . '\addMetas', 10, 2);
+function addMetas($object)
+{
+?>
+    <tbody class="frontend-form expand-wrapper property project <?php if ($object->postName != 'project') echo ' hidden'; ?>">
+        <tr>
+            <td>
+                <h4>
+                    Parent project
+                </h4>
+            </td>
+            <td>
+
+                <button class="button small expand" type='button'>
+                    &#9660;
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="hidden expandable">
+                <?php
+                TSJIPPY\pageSelect('parent-project', $object->postParent, '', ['project'], false, true);
+                ?>
+            </td>
+        </tr>
+    </tbody>
+
+    <tbody class="frontend-form expand-wrapper property project <?php if ($object->postName != 'project') echo ' hidden'; ?>">
+        <tr>
+            <td>
+                <h4>
+                    Update warnings
+                </h4>
+            </td>
+            <td>
+                <button class="button small expand" type='button'>
+                    &#9660;
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="hidden expandable">
+                <input
+                    type='checkbox'
+                    name='static-content'
+                    value='static-content'
+                    <?php if (!empty($object->getPostMeta('static_content', ''))) echo 'checked'; ?>>
+                Do not send update warnings for this project
+            </td>
+        </tr>
+    </tbody>
 <?php
 }
