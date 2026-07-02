@@ -5,6 +5,7 @@
 - deefault meta value implementation
 
 ### Changed
+- dropdown layout
 
 ### Fixed
 
