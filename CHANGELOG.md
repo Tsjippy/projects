@@ -2,14 +2,21 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- deefault meta value implementation
 
 ### Changed
-- dropdown layout
 
 ### Fixed
 
 ### Updated
+
+## [10.2.8] - 2026-07-03
+
+
+### Added
+- deefault meta value implementation
+
+### Changed
+- dropdown layout
 
 ## [10.2.6] - 2026-07-02
 
