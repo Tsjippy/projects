@@ -37,7 +37,7 @@ const Edit = () => {
       let options = response.map((c) => ({ label: c.post_title, value: c.ID }));
 
       options.unshift({
-        label: __("Please select a ministry", "sim"),
+        label: __("Please select a ministry", "tsjippy"),
         value: "",
       });
 
@@ -106,6 +106,7 @@ const Edit = () => {
       />
 
       <SelectControl
+        __next40pxDefaultSize={true} 
         label="Ministry"
         value={ministry}
         options={ministries}
