@@ -30,7 +30,7 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
         <?php
         if ($archive) {
             $url = get_permalink(get_the_ID());
- echo the_title("<h3 class='archivetitle'><a href='$url'>", '</a></h3>');
+            echo the_title("<h3 class='archivetitle'><a href='$url'>", '</a></h3>');
         } else {
             do_action('tsjippy-before-content');
         }
@@ -123,51 +123,29 @@ wp_enqueue_style('tsjippy_projects_template', TSJIPPY\pathToUrl(TSJIPPY\PLUGINPA
                         <?php
                     }
 
-                    $manager        = get_post_meta(get_the_ID(), 'tsjippy_manager', true);
-
-                    if (!is_array($manager)) {
-                        $manager    = json_decode($manager, true);
-                    }
                     ?>
                     <div class='number project meta'>
                         <?php
-                        if (!empty($manager['user-id'])) {
                             ?>
-                            <a href='<?php echo esc_url(get_author_posts_url($manager['user-id']));?>'>
-                            <?php
-                        }
-                        ?>
+                            <a href='<?php echo esc_url(get_author_posts_url(get_post_meta(get_the_ID(), 'tsjippy_manager_user_id', true)));?>'>
                                 <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/manager.png'));?>' alt='manager' loading='lazy' class='project-icon'>
-                                <?php echo esc_html($manager['name']);
-                        if (!empty($manager['user-id'])) {
-                            ?>
+                                <?php echo esc_html(get_post_meta(get_the_ID(), 'tsjippy_manager_name', true));?>
                             </a>
-                            <?php
-                        }
-                        ?>
                     </div>
 
-                    <?php
-                    if (!empty($manager['tel'])) {
-                        ?>
-                        <div class='tel project meta'>
-                            <a href='tel:<?php echo esc_url($manager['tel']);?>'>
-                                <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/tel.png'));?>' alt='telephone' loading='lazy' class='project-icon'> <?php echo esc_html($manager['tel']);?>
-                            </a>
-                        </div>
-                        <?php
-                    }
+                    <div class='tel project meta'>
+                        <a href='tel:<?php echo esc_url(get_post_meta(get_the_ID(), 'tsjippy_manager_tel', true));?>'>
+                            <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/tel.png'));?>' alt='telephone' loading='lazy' class='project-icon'> 
+                            <?php echo esc_html(get_post_meta(get_the_ID(), 'tsjippy_manager_tel', true));?>
+                        </a>
+                    </div>
 
-                    if (!empty($manager['email'])) {
-                        ?>
-                        <div class='email project meta'>
-                            <a href='mailto:<?php echo esc_url($manager['email']);?>'>
-                                <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/email.png'));?>' alt='email' loading='lazy' class='project-icon'> <?php echo esc_html($manager['email']);?>
-                            </a>
-                        </div>
-                        <?php
-                    }
-                    ?>
+                    <div class='email project meta'>
+                        <a href='mailto:<?php echo esc_url(get_post_meta(get_the_ID(), 'tsjippy_manager_email', true));?>'>
+                            <img src='<?php echo esc_url(TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/email.png'));?>' alt='email' loading='lazy' class='project-icon'> 
+                            <?php echo esc_html(get_post_meta(get_the_ID(), 'tsjippy_manager_email', true));?>
+                        </a>
+                    </div>
 
                     <div class='url project meta'>
                         <?php

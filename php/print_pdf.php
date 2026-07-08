@@ -19,25 +19,21 @@ function beforePrint($post, $pdf)
     $pdf->printImage($url, 10, -1, 10, 10);
     $pdf->write(10, get_post_meta(get_the_ID(), 'tsjippy_number', true));
 
-    $manager = get_post_meta(get_the_ID(), 'tsjippy_manager', true);
-
     //Manager name
     $url = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/manager.png');
     $pdf->printImage($url, 55, -1, 10, 10);
-    $pdf->write(10, $manager['name']);
+    $pdf->write(10, get_post_meta(get_the_ID(), 'tsjippy_manager_name', true));
 
     //Manager tel
     $url = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/tel.png');
     $pdf->printImage($url, 100, -1, 10, 10);
-    $pdf->write(10, $manager['tel']);
+    $pdf->write(10, get_post_meta(get_the_ID(), 'tsjippy_manager_tel', true));
 
     //Manager e-mail
-    if (!empty($manager['email'])) {
-        $url    = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/email.png');
-        $y      = $pdf->getY() + 12;
-        $pdf->printImage($url, 10, $y, 10, 10);
-        $pdf->write(10, $manager['email']);
-    }
+    $url    = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/email.png');
+    $y      = $pdf->getY() + 12;
+    $pdf->printImage($url, 10, $y, 10, 10);
+    $pdf->write(10, get_post_meta(get_the_ID(), 'tsjippy_manager_email', true));
 
     //Url
     $imageUrl = TSJIPPY\pathToUrl(PLUGINPATH . 'pictures/url.png');

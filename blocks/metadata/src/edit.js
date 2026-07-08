@@ -10,29 +10,20 @@ import { useBlockProps } from "@wordpress/block-editor";
 import apiFetch from "@wordpress/api-fetch";
 import { useState, useEffect } from "@wordpress/element";
 
-const Edit = () => {
+const Edit = ({ setAttributes, attributes, context }) => {
+  const { number, url, manager_user_id, manager_name, manager_tel, manager_email, ministry } = attributes;
+
   const blockProps = useBlockProps();
-  const postType = useSelect(
+  const postType   = useSelect(
     (select) => select("core/editor").getCurrentPostType(),
     [],
   );
 
-  const [meta, setMeta] = useEntityProp("postType", postType, "meta");
+  const [meta, setMeta]             = useEntityProp("postType", postType, "meta");
   const [ministries, setMinistries] = useState([]);
 
-  const number = meta["number"];
-  const url = meta["url"];
-  const ministry = meta["ministry"];
-  const manager =
-    meta["manager"] == undefined || meta["manager"] == ""
-      ? {}
-      : JSON.parse(meta["manager"]);
-
   useEffect(() => {
-    async function getMinistries() {
-      const response = await apiFetch({
-        path: "/tsjippy/v2/projects/ministries?slug=ministry",
-      });
+    apiFetch({ path: "/tsjippy/v2/projects/ministries?slug=ministry"}).then( res => {
 
       let options = response.map((c) => ({ label: c.post_title, value: c.ID }));
 
@@ -42,26 +33,13 @@ const Edit = () => {
       });
 
       setMinistries(options);
-    }
-    getMinistries();
+    })
   }, []);
 
   const updateMetaValue = (value, key) => {
     let newMeta = { ...meta };
-    if (key.startsWith("manager")) {
-      let subkey = key.split("-")[1];
-      key = "tsjippy_manager";
-      let newManager = {};
 
-      if (manager != "") {
-        newManager = { ...manager };
-      }
-
-      newManager[subkey] = value;
-
-      value = JSON.stringify(newManager);
-    }
-    newMeta[key] = value;
+    newMeta[`tsjippy_${key}`] = value;
 
     setMeta(newMeta);
   };
@@ -74,35 +52,35 @@ const Edit = () => {
         isPressEnterToChange={true}
         label={__("Project number")}
         value={number}
-        onChange={(value) => updateMetaValue(value, "tsjippy_number")}
+        onChange={(value) => updateMetaValue(value, "number")}
       />
 
       <InputControl
         isPressEnterToChange={true}
         label={__("Manager name")}
         value={manager["name"]}
-        onChange={(value) => updateMetaValue(value, "manager-name")}
+        onChange={(value) => updateMetaValue(value, "manager_name")}
       />
 
       <InputControl
         isPressEnterToChange={true}
         label={__("Phone number")}
         value={manager["tel"]}
-        onChange={(value) => updateMetaValue(value, "manager-tel")}
+        onChange={(value) => updateMetaValue(value, "manager_tel")}
       />
 
       <InputControl
         isPressEnterToChange={true}
         label={__("E-mail address")}
         value={manager["email"]}
-        onChange={(value) => updateMetaValue(value, "manager-email")}
+        onChange={(value) => updateMetaValue(value, "manager_email")}
       />
 
       <InputControl
         isPressEnterToChange={true}
         label={__("Website url")}
         value={url}
-        onChange={(value) => updateMetaValue(value, "tsjippy_url")}
+        onChange={(value) => updateMetaValue(value, "url")}
       />
 
       <SelectControl
@@ -110,7 +88,7 @@ const Edit = () => {
         label="Ministry"
         value={ministry}
         options={ministries}
-        onChange={(value) => updateMetaValue(value, "tsjippy_ministry")}
+        onChange={(value) => updateMetaValue(value, "ministry")}
         __nextHasNoMarginBottom
       />
     </div>

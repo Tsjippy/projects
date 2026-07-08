@@ -12,28 +12,33 @@ function blockInit()
         __DIR__ . '/metadata/build',
         array(
             "attributes"    =>  [
-                "lock"    => [
-                    "type"    => "object",
-                    "default"    => [
-                        "move"        => true,
-                        "remove"    => true
-                    ]
-                ],
                 'number'    => [
                     'type'    => 'int',
-                    'default'    => ''
+                    'default' => ''
                 ],
                 'url'    => [
                     'type'    => 'string',
-                    'default'    => ''
+                    'default' => ''
                 ],
-                'manager'    => [
-                    'type'        => 'string',
-                    'default'    => '{"user_id":"","name":"","tel":"","email":"","":""}'
+                'manager_user_id'    => [
+                    'type'    => 'integer',
+                    'default' => 0
+                ],
+                'manager_name'    => [
+                    'type'    => 'string',
+                    'default' => ''
+                ],
+                'manager_tel'    => [
+                    'type'    => 'string',
+                    'default' => ''
+                ],
+                'manager_email'    => [
+                    'type'    => 'string',
+                    'default' => ''
                 ],
                 'ministry'    => [
                     'type'    => 'int',
-                    'default'    => ''
+                    'default' => 0
                 ]
             ]
         )

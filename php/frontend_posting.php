@@ -13,11 +13,11 @@ function contentTitle($postType)
         $class .= ' hidden';
     }
 
-?>
+    ?>
     <h4 class='<?php echo esc_attr($class); ?>'>
         Please describe the project
     </h4>
-<?php
+    <?php
 }
 
 /**
@@ -34,43 +34,16 @@ function afterPostSave($post, $frontEndPost, $request)
         return;
     }
 
-    //manager
-    if (isset($request['manager'])) {
-        if (empty($request['manager'])) {
-            delete_post_meta($post->ID, 'tsjippy_manager');
-        } else {
-            //Store manager
-            update_metadata('post', $post->ID, 'tsjippy_manager', json_encode($request['manager']));
+    foreach(['number','url','manager_user_id','manager_name','manager_tel','manager_email','ministry'] as $key){
+        if (!isset($request[$key])) {
+            continue;
         }
-    }
 
-    // number
-    if (isset($request['number'])) {
-        if (empty($request['number'])) {
-            delete_post_meta($post->ID, 'tsjippy_number');
+        if (empty($request[$key])) {
+            delete_post_meta($post->ID, "tsjippy_$key");
         } else {
-            //Store serves
-            update_metadata('post', $post->ID, 'tsjippy_number', $request['number']);
-        }
-    }
-
-    //url
-    if (isset($request['url'])) {
-        if (empty($request['url'])) {
-            delete_post_meta($post->ID, 'tsjippy_url');
-        } else {
-            //Store serves
-            update_metadata('post', $post->ID, 'tsjippy_url', $request['url']);
-        }
-    }
-
-    // ministry
-    if (isset($request['ministry'])) {
-        if (empty($request['ministry'])) {
-            delete_post_meta($post->ID, 'tsjippy_ministry');
-        } else {
-            //Store serves
-            update_metadata('post', $post->ID, 'tsjippy_ministry', $request['ministry']);
+            //Store value
+            update_metadata('post', $post->ID, "tsjippy_$key", $request[$key]);
         }
     }
 }
@@ -87,30 +60,15 @@ function afterContent($frontendContend)
     wp_enqueue_script('tsjippy_project_script');
     $postName   = $frontendContend->postName;
 
-    $manager    = $frontendContend->getPostMeta('manager', []);
-    $managerId  = '';
-    if (isset($manager['user-id'])) {
-        $managerId  = $manager['user-id'];
-    }
+    $managerId    = $frontendContend->getPostMeta('manager_user_id', 0);
 
-    $managerName  = '';
-    if (isset($manager['name'])) {
-        $managerName  = $manager['name'];
-    }
+    $managerName  = $frontendContend->getPostMeta('manager_name', '');
+    $managerTel   = $frontendContend->getPostMeta('manager_tel', '');
+    $managerEmail = $frontendContend->getPostMeta('manager_email', '');
 
-    $managerTel  = '';
-    if (isset($manager['tel'])) {
-        $managerTel  = $manager['tel'];
-    }
+    $url          = $frontendContend->getPostMeta('url', '');
 
-    $managerEmail  = '';
-    if (isset($manager['email'])) {
-        $managerEmail  = $manager['email'];
-    }
-
-    $url        = $frontendContend->getPostMeta('url', '');
-
-    $number     = $frontendContend->getPostMeta('number', '');
+    $number       = $frontendContend->getPostMeta('number', '');
 
     //Get all pages describing a ministry
     $ministries = get_posts([
@@ -130,7 +88,7 @@ function afterContent($frontendContend)
 
     $selectedMinistry = $frontendContend->getPostMeta('ministry', '');
 
-?>
+    ?>
     <div id="project-attributes" class="property project <?php if ($postName != 'project') echo ' hidden'; ?>">
 
         <fieldset id="project" class="frontend-form">
@@ -150,20 +108,20 @@ function afterContent($frontendContend)
                 <tr>
                     <th><label for="name">Manager name</label></th>
                     <td>
-                        <input type='hidden' class='no-reset' class='datalistvalue' name='manager[user-id]' value='<?php echo esc_attr($managerId); ?>'>
-                        <input type="text" class='formbuilder' name="manager[name]" value="<?php echo esc_attr($managerName); ?>" list='users'>
+                        <input type='hidden' class='no-reset' class='datalistvalue' name='manager_user_id]' value='<?php echo esc_attr($managerId); ?>'>
+                        <input type="text" class='formbuilder' name="manager_name" value="<?php echo esc_attr($managerName); ?>" list='users'>
                     </td>
                 </tr>
                 <tr>
                     <th><label for="name">Manager phone number</label></th>
                     <td>
-                        <input type="tel" class='formbuilder' name="manager[tel]" value="<?php echo esc_attr($managerTel); ?>">
+                        <input type="tel" class='formbuilder' name="manager_tel" value="<?php echo esc_attr($managerTel); ?>">
                     </td>
                 </tr>
                 <tr>
                     <th><label for="name">Manager e-mail</label></th>
                     <td>
-                        <input type="text" class='formbuilder' name="manager[email]" value="<?php echo esc_attr($managerEmail); ?>">
+                        <input type="text" class='formbuilder' name="manager_email" value="<?php echo esc_attr($managerEmail); ?>">
                     </td>
                 </tr>
                 <tr>
