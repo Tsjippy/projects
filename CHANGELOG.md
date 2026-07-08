@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- store project manager in seperate post meta entries
 
 ### Fixed
 
