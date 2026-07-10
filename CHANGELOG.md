@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- block name
 
 ### Fixed
 
 ### Updated
+
+## [10.3.4] - 2026-07-10
+
+
+### Changed
+- block name
 
 ## [10.3.3] - 2026-07-10
 
