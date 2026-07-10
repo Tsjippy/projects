@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- store project manager in seperate post meta entries
 
 ### Fixed
 
 ### Updated
+
+## [10.3.2] - 2026-07-10
+
+
+### Changed
+- store project manager in seperate post meta entries
 
 ## [10.3.1] - 2026-07-06
 
