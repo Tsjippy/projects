@@ -5,6 +5,11 @@ namespace TSJIPPY\PROJECTS;
 use TSJIPPY;
 
 add_action('tsjippy-frontend-content-post-content-title',  __NAMESPACE__ . '\contentTitle');
+/**
+ * Adds a description for the project post title input
+ * 
+ * @param   string  $postType
+ */
 function contentTitle($postType)
 {
     //Property content title
@@ -28,6 +33,9 @@ function contentTitle($postType)
  * @param   array       $request    The sanitized request data
  */
 add_action('tsjippy-frontend-content-after-post-save',  __NAMESPACE__ . '\afterPostSave', 10, 3);
+/**
+ * Save project specific 
+ */
 function afterPostSave($post, $frontEndPost, $request)
 {
     if ($post->post_type != 'project') {
@@ -50,6 +58,11 @@ function afterPostSave($post, $frontEndPost, $request)
 
 //add meta data fields before any other
 add_action('tsjippy-frontend-content-post-before-default-options-content',  __NAMESPACE__ . '\afterContent', 10, 2);
+/**
+ * Shows project inputs
+ * 
+ * @param object $frontendContend   THe instance
+ */
 function afterContent($frontendContend)
 {
     if (!empty($frontendContend->post) && $frontendContend->post->post_type != 'project') {
@@ -169,6 +182,11 @@ function afterContent($frontendContend)
 
 //add meta data fields
 add_action('tsjippy-frontend-content-post-after-content',  __NAMESPACE__ . '\addMetas', 10, 2);
+/**
+ * Adds inputs for the project meta
+ * 
+ * @param   object  $object 
+ */
 function addMetas($object)
 {
 ?>
