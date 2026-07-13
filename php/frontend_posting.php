@@ -25,18 +25,15 @@ function contentTitle($postType)
     <?php
 }
 
+add_action('tsjippy-frontend-content-after-post-save',  __NAMESPACE__ . '\afterPostSave', 10, 3);
 /**
- * Allow comments
+ * Runs after a post is saved or updated
  * 
  * @param   \WP_Post    $post       The new or updated post
  * @param   object      $object     FrontEndContent Instance
  * @param   array       $request    The sanitized request data
  */
-add_action('tsjippy-frontend-content-after-post-save',  __NAMESPACE__ . '\afterPostSave', 10, 3);
-/**
- * Save project specific 
- */
-function afterPostSave($post, $frontEndPost, $request)
+function afterPostSave($post, $object, $request)
 {
     if ($post->post_type != 'project') {
         return;
