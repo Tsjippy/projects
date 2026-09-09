@@ -5,14 +5,14 @@ namespace TSJIPPY\PROJECTS;
 /**
  * Plugin Name:          Tsjippy Projects
  * Description:          This plugin adds a custom post type 'projects' .
- * Version:              10.5.2
+ * Version:              10.5.3
  * Author:               Ewald Harmsen
  * AuthorURI:            harmseninnigeria.nl
  * Requires at least:    6.3
  * Requires PHP:         8.3
- * Tested up to:         7.0
+ * Tested up to:         7.1
  * Plugin URI:            https://github.com/Tsjippy/
- * Tested:               7.0
+ * Tested:               7.1
  * TextDomain:            tsjippy
  * Requires Plugins:    , tsjippy-locations
  * License: GPLv2 or later
