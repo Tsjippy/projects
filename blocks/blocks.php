@@ -88,6 +88,7 @@ function blockRestApiInit()
         )
     );
 }
+
 function getPosts($request)
 {
     return get_posts([
