@@ -66,8 +66,6 @@ function afterContent($frontendContend)
         return;
     }
 
-    //Load js
-    wp_enqueue_script('tsjippy_project_script');
     $postName   = $frontendContend->postName;
 
     $managerId    = $frontendContend->getPostMeta('manager_user_id', 0);
