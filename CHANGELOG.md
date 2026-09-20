@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- js to modules
 
 ### Fixed
 
 ### Updated
+
+## [10.6.0] - 2026-09-20
+
+
+### Changed
+- js to modules
 
 ## [10.5.9] - 2026-09-16
 
